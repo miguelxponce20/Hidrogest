@@ -4,15 +4,20 @@ Sistema de Informacion Hidrico para el municio Juan German Roscio Nieves
 
 # Actualizaciones
 
+## 2025/08/16 V 0.0.0.2 
+
+- Arreglos en el Readme.md 
+
+## 2025/08/16 V 0.0.0.1 
+
+- Arreglos en el Readme.md
+
 ## 2025/08/16 V 0.0.0.0 (Version Inicial)
 
 ### Backend 
 
 - Se creo la estructura del proyecto
   
-## 2025/08/17
-  
-
 ### Frontend 
 
 - Se creo la estructura del proyecto
