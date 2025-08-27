@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIDROGEST - Registro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="registro.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <div class="logo">
+                    <img src="../LOGO.png" alt="HIDROGEST Logo">
+                </div>
+                <h1>HIDROGEST</h1>
+                <p>Crea tu cuenta para comenzar</p>
+            </div>
+        
+        <!-- Success Overlay -->
+        <div class="success-overlay" id="successOverlay">
+            <div class="success-content">
+                <div class="success-icon"></div>
+                <div class="success-title">¡Cuenta creada!</div>
+                <div class="success-message">Redirigiendo al login...</div>
+            </div>
+        </div>
+            
+            <form class="form" id="registerForm">
+                <div class="field-group">
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="nombre">Nombre completo <span class="required">*</span></label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo">
+                        </div>
+                        <div class="field">
+                            <label for="cedula">Cédula <span class="required">*</span></label>
+                            <input type="text" id="cedula" name="cedula" placeholder="V-12345678">
+                        </div>
+                    </div>
+                    
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="telefono">Teléfono <span class="required">*</span></label>
+                            <input type="tel" id="telefono" name="telefono" placeholder="0412-123-4567">
+                        </div>
+                        <div class="field">
+                            <label for="correo">Email <span class="required">*</span></label>
+                            <input type="email" id="correo" name="correo" placeholder="tu@email.com">
+                        </div>
+                    </div>
+                    
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="password">Contraseña <span class="required">*</span></label>
+                            <input type="password" id="password" name="password" placeholder="Mínimo 8 caracteres">
+                        </div>
+                        <div class="field">
+                            <label for="confirmPassword">Confirmar contraseña <span class="required">*</span></label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Repetir contraseña">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="field-group">
+                    <div class="field">
+                        <label for="tipo_usuario">Tipo de usuario <span class="required">*</span></label>
+                        <div class="input-with-icon">
+                            <select id="tipo_usuario" name="tipo_usuario" required>
+                                <option value="">Seleccionar tipo de usuario</option>
+                                <option value="propietario">Propietario</option>
+                                <option value="inquilino">Inquilino</option>
+                                <option value="ente_publico">Ente público</option>
+                                <option value="residente">Residente</option>
+                            </select>
+                            <button type="button" class="edit-icon" id="editUserType" title="Editar tipo de usuario">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11 4H4C3.46957 4 2.96086 4.21071 2.58579 4.58579C2.21071 4.96086 2 5.46957 2 6V20C2 20.5304 2.21071 21.0391 2.58579 21.4142C2.96086 21.7893 3.46957 22 4 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M18.5 2.50023C18.8978 2.1025 19.4374 1.87891 20 1.87891C20.5626 1.87891 21.1022 2.1025 21.5 2.50023C21.8978 2.89795 22.1214 3.43757 22.1214 4.00023C22.1214 4.56289 21.8978 5.1025 21.5 5.50023L12 15.0002L8 16.0002L9 12.0002L18.5 2.50023Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitBtn">Crear cuenta</button>
+            </form>
+            
+            <div class="login-link">
+                ¿Ya tienes cuenta? <a href="../login/login.html">Iniciar sesión</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para información del propietario -->
+    <div id="propertyModal" class="property-modal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Información de la propiedad</h3>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="propertyForm" class="property-form">
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="localidad">Localidad</label>
+                            <input type="text" id="localidad" name="localidad" placeholder="Sector o urbanización">
+                        </div>
+                        <div class="field">
+                            <label for="tipo_inmueble">Tipo de inmueble</label>
+                            <select id="tipo_inmueble" name="tipo_inmueble">
+                                <option value="">Seleccionar tipo</option>
+                                <option value="casa">Casa</option>
+                                <option value="apartamento">Apartamento</option>
+                                <option value="comercial">Local comercial</option>
+                                <option value="oficina">Oficina</option>
+                                <option value="industrial">Industrial</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="personas_sitio">Personas en el sitio</label>
+                            <input type="number" id="personas_sitio" name="personas_sitio" min="1" placeholder="Número de personas">
+                        </div>
+                        <div class="field">
+                            <label for="coordenadas">Coordenadas</label>
+                            <input type="text" id="coordenadas" name="coordenadas" placeholder="10.123456, -67.123456">
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn-secondary" id="modalCancel">Cancelar</button>
+                        <button type="submit" class="btn-primary">Guardar información</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const tipoUsuarioSelect = document.getElementById('tipo_usuario');
+        const editUserTypeBtn = document.getElementById('editUserType');
+        const propertyModal = document.getElementById('propertyModal');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalClose = document.getElementById('modalClose');
+        const modalCancel = document.getElementById('modalCancel');
+        const propertyForm = document.getElementById('propertyForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const form = document.getElementById('registerForm');
+        const successOverlay = document.getElementById('successOverlay');
+        
+        // Handle user type selection
+        tipoUsuarioSelect.addEventListener('change', function() {
+            if (this.value === 'propietario') {
+                propertyModal.classList.add('show');
+            }
+        });
+        
+        // Handle edit icon click
+        editUserTypeBtn.addEventListener('click', function() {
+            if (tipoUsuarioSelect.value === 'propietario') {
+                propertyModal.classList.add('show');
+            } else {
+                // Si no es propietario, permitir cambiar el tipo
+                tipoUsuarioSelect.focus();
+                tipoUsuarioSelect.click();
+            }
+        });
+        
+        // Close modal when clicking overlay
+        modalOverlay.addEventListener('click', function() {
+            propertyModal.classList.remove('show');
+        });
+        
+        // Close modal with close button
+        modalClose.addEventListener('click', function() {
+            propertyModal.classList.remove('show');
+        });
+        
+        // Handle modal cancel
+        modalCancel.addEventListener('click', function() {
+            propertyModal.classList.remove('show');
+        });
+        
+        // Handle property form submission
+        propertyForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            propertyModal.classList.remove('show');
+            // Aquí puedes agregar lógica para guardar la información
+        });
+        
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show success overlay
+            successOverlay.classList.add('show');
+            
+            // Redirect to login after 2 seconds
+            setTimeout(() => {
+                window.location.href = '../login/login.html';
+            }, 2000);
+        });
+        
+        // Input formatting for better UX
+        document.getElementById('cedula').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/[^\dVEJPG-]/g, '');
+            if (value && !value.match(/^[VEJPG]-/)) {
+                value = 'V-' + value.replace(/^[VEJPG-]/, '');
+            }
+            e.target.value = value;
+        });
+        
+        document.getElementById('telefono').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/[^\d]/g, '');
+            if (value.length >= 4) {
+                value = value.substring(0, 4) + '-' + value.substring(4, 7) + '-' + value.substring(7, 11);
+            }
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>
