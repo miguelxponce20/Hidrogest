@@ -709,6 +709,14 @@ body {
     color: var(--success);
 }
 
+.map-container {
+  height: 300px;
+  border-radius: 16px;
+  margin: 20px;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
 /* User Dropdown - Moved to bottom for better organization */
 
 /* Modals */
