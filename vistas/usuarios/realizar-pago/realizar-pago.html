@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Realizar Pago - HIDROGEST</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../../favicon/favicon-16x16.png"
+    />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../dashboard.css" />
+    <link rel="stylesheet" href="../usuarios.css" />
+  </head>
+  <body>
+    <!-- Header Superior -->
+    <header class="header">
+      <div class="header-left">
+        <div class="logo">
+          <img src="../../LOGO.png" alt="HIDROGEST Logo" />
+          <span class="logo-text">HIDROGEST</span>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <div class="search-bar">
+          <input type="text" placeholder="Buscar servicios de pago..." />
+          <button class="search-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="notifications">
+          <button class="notification-btn" id="notificationBtn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M18 8A6 6 0 0 0 6 8C6 15 3 17 3 17H21C21 17 18 15 18 8Z"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M13.73 21A2 2 0 0 1 10.27 21"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span class="notification-badge" id="notificationBadge">3</span>
+          </button>
+        </div>
+
+        <div class="user-menu">
+          <button class="user-btn" id="userBtn">
+            <div class="user-avatar">JD</div>
+            <div class="user-info">
+              <span class="user-name">Juan Doe</span>
+              <span class="user-type">Propietario</span>
+            </div>
+            <svg
+              class="chevron"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path
+                d="M6 9L12 15L18 9"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+
+            <!-- User Dropdown -->
+            <div class="user-dropdown" id="userDropdown">
+              <div class="dropdown-item" data-action="settings">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 20H21"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M16.5 3.5C17.163 2.837 17.948 2.5 18.75 2.5C19.552 2.5 20.337 2.837 21 3.5C21.663 4.163 22 4.948 22 5.75C22 6.552 21.663 7.337 21 8L12 17L7 12L16.5 3.5Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Configuración</span>
+              </div>
+              <div class="dropdown-item" data-action="help">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M9 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H11L13 5H19A2 2 0 0 1 21 7V9"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M16 2V6H20"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M9 15L15 9"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M9 9H9.01"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M15 15H15.01"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Ayuda</span>
+              </div>
+              <div class="dropdown-divider"></div>
+              <div class="dropdown-item logout" data-action="logout">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M9 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H11L13 5H19A2 2 0 0 1 21 7V19A2 2 0 0 1 19 21H9Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M16 2V6H20"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M9 15L15 9"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M9 9H9.01"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M15 15H15.01"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Cerrar Sesión</span>
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <h3 class="nav-title">Principal</h3>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="../../dashboard.html" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <polyline
+                    points="9,22 9,12 15,12 15,22"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <circle
+                    cx="12"
+                    cy="7"
+                    r="4"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Mi Perfil</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <rect
+                    x="3"
+                    y="4"
+                    width="18"
+                    height="18"
+                    rx="2"
+                    ry="2"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <line
+                    x1="16"
+                    y1="2"
+                    x2="16"
+                    y2="6"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <line
+                    x1="8"
+                    y1="2"
+                    x2="8"
+                    y2="6"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <line
+                    x1="3"
+                    y1="10"
+                    x2="21"
+                    y2="10"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Calendario</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-title">Servicios</h3>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M10.29 3.86L1.82 18A2 2 0 0 0 3.82 20H20.18A2 2 0 0 0 22.18 18L13.71 3.86A2 2 0 0 0 10.29 3.86Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <line
+                    x1="12"
+                    y1="9"
+                    x2="12"
+                    y2="13"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <line
+                    x1="12"
+                    y1="17"
+                    x2="12.01"
+                    y2="17"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Reportar Incidencia</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../mis-reportes/mis-reportes.html" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M14 2H6A2 2 0 0 0 4 4V20A2 2 0 0 0 6 22H18A2 2 0 0 0 20 20V8L14 2Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <polyline
+                    points="14,2 14,8 20,8"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <line
+                    x1="16"
+                    y1="13"
+                    x2="8"
+                    y2="13"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <line
+                    x1="16"
+                    y1="17"
+                    x2="8"
+                    y2="17"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <polyline
+                    points="10,9 9,9 8,9"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Mis Reportes</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section owner-only">
+          <h3 class="nav-title">Propietarios</h3>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="../mis-facturas/mis-facturas.html" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M14 2H6A2 2 0 0 0 4 4V20A2 2 0 0 0 6 22H18A2 2 0 0 0 20 20V8L14 2Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <polyline
+                    points="14,2 14,8 20,8"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <line
+                    x1="16"
+                    y1="13"
+                    x2="8"
+                    y2="13"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <line
+                    x1="16"
+                    y1="17"
+                    x2="8"
+                    y2="17"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <polyline
+                    points="10,9 9,9 8,9"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Mis Facturas</span>
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a href="#" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 1V23"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M17 5H9.5A3.5 3.5 0 0 0 6 8.5V11A3.5 3.5 0 0 0 9.5 14.5H17"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Realizar Pago</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../mis-propiedades/mis-propiedades.html" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <polyline
+                    points="9,22 9,12 15,12 15,22"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Mis Propiedades</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+      <div class="page-header">
+        <h1>Realizar Pago</h1>
+        <p>Paga tus facturas de manera segura y rápida</p>
+      </div>
+
+      <!-- Resumen de Facturación -->
+      <div class="payment-summary">
+        <h4>Resumen de Facturación</h4>
+        <div class="payment-details">
+          <div class="payment-item">
+            <span>Factura:</span>
+            <span class="bill-number" id="paymentBillNumber">#FAC-2024-001</span>
+          </div>
+          <div class="payment-item">
+            <span>Monto:</span>
+            <span class="amount" id="paymentAmount">$45.50</span>
+          </div>
+          <div class="payment-item">
+            <span>Vencimiento:</span>
+            <span class="due-date" id="paymentDueDate">15 Dic 2024</span>
+          </div>
+          <div class="payment-item total">
+            <span>Total a Pagar:</span>
+            <span class="amount" id="paymentTotal">$45.50</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario de Pago -->
+      <div class="payment-form-container">
+        <form id="paymentForm" class="modal-form">
+          <div class="form-group">
+            <label for="paymentMethod"
+              >Método de Pago <span class="required">*</span></label
+            >
+            <select
+              id="paymentMethod"
+              name="paymentMethod"
+              required
+              onchange="togglePaymentFields()"
+            >
+              <option value="">Seleccionar método</option>
+              <option value="debit">Tarjeta de Débito</option>
+              <option value="credit">Tarjeta de Crédito</option>
+              <option value="transfer">Transferencia Bancaria</option>
+              <option value="cash">Efectivo</option>
+            </select>
+          </div>
+
+          <!-- Campos para tarjetas -->
+          <div
+            class="payment-method-fields"
+            id="cardFields"
+            style="display: none"
+          >
+            <div class="form-group">
+              <label for="cardNumber"
+                >Número de Tarjeta <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                id="cardNumber"
+                name="cardNumber"
+                placeholder="1234 5678 9012 3456"
+                maxlength="19"
+                oninput="formatCardNumber(this)"
+              />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="expiryDate"
+                  >Fecha de Vencimiento <span class="required">*</span></label
+                >
+                <input
+                  type="text"
+                  id="expiryDate"
+                  name="expiryDate"
+                  placeholder="MM/AA"
+                  maxlength="5"
+                  oninput="formatExpiryDate(this)"
+                />
+              </div>
+              <div class="form-group">
+                <label for="cardCVV"
+                  >CVV <span class="required">*</span></label
+                >
+                <input
+                  type="text"
+                  id="cardCVV"
+                  name="cardCVV"
+                  placeholder="123"
+                  maxlength="3"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cardholderName"
+                >Nombre del Titular <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                id="cardholderName"
+                name="cardholderName"
+                placeholder="Juan Doe"
+              />
+            </div>
+          </div>
+
+          <!-- Campos para transferencia bancaria -->
+          <div
+            class="payment-method-fields"
+            id="transferFields"
+            style="display: none"
+          >
+            <div class="form-group">
+              <label for="bankName"
+                >Banco <span class="required">*</span></label
+              >
+              <select id="bankName" name="bankName">
+                <option value="">Seleccionar banco</option>
+                <option value="banesco">Banesco</option>
+                <option value="banco_venezuela">Banco de Venezuela</option>
+                <option value="bbva">BBVA Provincial</option>
+                <option value="mercantil">Banco Mercantil</option>
+                <option value="bancaribe">Bancaribe</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="accountNumber"
+                >Número de Cuenta <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                id="accountNumber"
+                name="accountNumber"
+                placeholder="0000-0000-0000-0000"
+              />
+            </div>
+            <div class="form-group">
+              <label for="referenceNumber"
+                >Número de Referencia <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                id="referenceNumber"
+                name="referenceNumber"
+                placeholder="Ref-123456789"
+              />
+            </div>
+          </div>
+
+          <!-- Información adicional -->
+          <div class="payment-info">
+            <div class="info-notice">
+              <h5>Información Importante</h5>
+              <ul>
+                <li>Todos los pagos son procesados de forma segura</li>
+                <li>Recibirás confirmación por email una vez procesado el pago</li>
+                <li>El servicio se reactivará automáticamente después del pago</li>
+                <li>Para pagos en efectivo, acude a nuestras oficinas autorizadas</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" onclick="cancelPayment()">
+              Cancelar
+            </button>
+            <button type="submit" class="btn-primary">
+              Confirmar Pago
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <!-- Modal de Confirmación de Pago -->
+    <div class="modal" id="paymentConfirmationModal">
+      <div class="modal-overlay" id="confirmationModalOverlay"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Confirmar Pago</h3>
+          <button class="modal-close" id="confirmationModalClose">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M18 6L6 18M6 6L18 18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="confirmation-details">
+            <div class="confirmation-icon">💳</div>
+            <h4>¿Confirmar el pago?</h4>
+            <div class="confirmation-summary">
+              <p><strong>Factura:</strong> <span id="confirmBillNumber">#FAC-2024-001</span></p>
+              <p><strong>Monto:</strong> <span id="confirmAmount">$45.50</span></p>
+              <p><strong>Método:</strong> <span id="confirmMethod">Tarjeta de Crédito</span></p>
+            </div>
+            <div class="confirmation-notice">
+              <p>Al confirmar, autorizas el cargo a tu método de pago seleccionado.</p>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" id="confirmationCancel">
+              Revisar Datos
+            </button>
+            <button type="button" class="btn-primary" onclick="processPayment()">
+              Confirmar y Pagar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de Pago Exitoso -->
+    <div class="modal" id="paymentSuccessModal">
+      <div class="modal-overlay" id="successModalOverlay"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>¡Pago Exitoso!</h3>
+        </div>
+        <div class="modal-body">
+          <div class="success-details">
+            <div class="success-icon">✅</div>
+            <h4>Pago procesado correctamente</h4>
+            <div class="success-summary">
+              <p><strong>ID de Transacción:</strong> <span id="transactionId">TXN-2024-001</span></p>
+              <p><strong>Factura:</strong> <span id="successBillNumber">#FAC-2024-001</span></p>
+              <p><strong>Monto pagado:</strong> <span id="successAmount">$45.50</span></p>
+              <p><strong>Fecha:</strong> <span id="successDate">15 Dic 2024, 10:30 AM</span></p>
+            </div>
+            <div class="success-message">
+              <p>Tu factura ha sido pagada exitosamente. El servicio se mantendrá activo.</p>
+              <p>Recibirás un comprobante por email en los próximos minutos.</p>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" onclick="downloadReceipt()">
+              Descargar Recibo
+            </button>
+            <button type="button" class="btn-primary" onclick="goToBills()">
+              Ver Mis Facturas
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../../dashboard.js"></script>
+    <script src="./realizar-pago.js"></script>
+  </body>
+</html>

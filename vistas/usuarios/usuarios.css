@@ -1,0 +1,318 @@
+/* Principal styles for user views: Mis Reportes, Mis Facturas, Realizar Pago, Mis Propiedades */
+
+/* Consistent background for usuarios views */
+body {
+    background: linear-gradient(180deg, #f6f9fc 0%, #eef3f9 100%);
+}
+
+/* Base containers - Asegurar que no interfiera con sidebar */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 16px;
+    margin-left: 280px; /* Espacio para la sidebar */
+    width: calc(100% - 280px); /* Ancho restante después de la sidebar */
+    box-sizing: border-box;
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 1024px) {
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 12px 16px;
+    }
+}
+
+.page-header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+.page-header h1 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--on-surface);
+}
+.page-header p {
+    font-size: 14px;
+    color: var(--on-surface-secondary);
+}
+
+/* Shared filters bar */
+.filters-bar,
+.reports-filters,
+.bills-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+.filters-bar .filter-btn,
+.reports-filters .filter-btn,
+.bills-filters .filter-btn {
+    background: var(--surface-secondary);
+    border: 1px solid var(--outline);
+    color: var(--on-surface-secondary);
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.filters-bar .filter-btn:hover,
+.reports-filters .filter-btn:hover,
+.bills-filters .filter-btn:hover {
+    background: var(--surface-tertiary);
+}
+.filters-bar .filter-btn.active,
+.reports-filters .filter-btn.active,
+.bills-filters .filter-btn.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+}
+/* Accesibilidad foco visible */
+.filters-bar .filter-btn:focus-visible,
+.reports-filters .filter-btn:focus-visible,
+.bills-filters .filter-btn:focus-visible,
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-success:focus-visible,
+.btn-outline:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--primary) 60%, transparent);
+    outline-offset: 2px;
+}
+/* Filtros pegajosos para listas largas */
+.reports-filters,
+.bills-filters {
+    position: sticky;
+    top: 8px;
+    z-index: 5;
+}
+
+/* Cards and lists */
+.card,
+.report-item,
+.bill-item,
+.property-card,
+.widget {
+    background: var(--surface);
+    border: 1px solid var(--outline-light);
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+}
+
+.report-item,
+.bill-item,
+.property-card {
+    padding: 20px;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.report-item:hover,
+.bill-item:hover,
+.property-card:hover {
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-2px);
+}
+
+/* Mis Reportes */
+.reports-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 16px;
+}
+.report-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.report-id { font-size: 13px; font-weight: 700; color: var(--on-surface-secondary); }
+.report-status { padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+.report-status.pending { background: rgba(245,158,11,.12); color: var(--warning); }
+.report-status.in-progress { background: rgba(59,130,246,.12); color: var(--info); }
+.report-status.resolved { background: rgba(16,185,129,.12); color: var(--success); }
+.report-info h3 { font-size: 16px; font-weight: 700; color: var(--on-surface); margin: 0 0 6px; }
+.report-description { font-size: 14px; color: var(--on-surface-secondary); line-height: 1.5; }
+.report-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; font-size: 12px; color: var(--on-surface-secondary); }
+.report-meta .report-priority.high { color: var(--error); font-weight: 700; }
+
+/* Report timeline */
+.report-timeline { margin-top: 12px; }
+.timeline-item { display: flex; gap: 10px; align-items: flex-start; }
+.timeline-dot { width: 10px; height: 10px; background: var(--outline); border-radius: 50%; margin-top: 6px; }
+.timeline-dot.active { background: var(--info); }
+.timeline-dot.completed { background: var(--success); }
+.timeline-content { font-size: 12px; color: var(--on-surface-secondary); }
+
+/* Timeline mejorado */
+.timeline-connector {
+    position: absolute;
+    left: 5px;
+    top: 20px;
+    width: 2px;
+    height: 20px;
+    background: var(--outline-light);
+    z-index: 1;
+}
+
+/* Report modal detail */
+.report-details { display: flex; flex-direction: column; gap: 16px; }
+.report-header-info { display: flex; justify-content: space-between; align-items: center; }
+.report-id-large { font-size: 14px; font-weight: 800; color: var(--on-surface-secondary); }
+.report-status-large { padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 800; }
+.report-status-large.pending { background: rgba(245,158,11,.12); color: var(--warning); }
+.report-status-large.in-progress { background: rgba(59,130,246,.12); color: var(--info); }
+.report-status-large.resolved { background: rgba(16,185,129,.12); color: var(--success); }
+.info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.info-item label { display: block; font-size: 12px; color: var(--on-surface-secondary); margin-bottom: 4px; }
+
+/* Mis Facturas */
+.bills-list { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 16px; 
+    max-width: 100%; /* Evitar overflow */
+    overflow-x: hidden; /* Prevenir scroll horizontal */
+}
+.bill-header { margin-bottom: 12px; }
+.bill-number { font-size: 13px; font-weight: 700; color: var(--on-surface-secondary); }
+.bill-status { padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+.bill-status.pending { background: rgba(245,158,11,.12); color: var(--warning); }
+.bill-status.paid { background: rgba(16,185,129,.12); color: var(--success); }
+.bill-status.overdue { background: rgba(239,68,68,.12); color: var(--error); }
+.bill-info h4 { font-size: 16px; font-weight: 700; margin: 0 0 6px; }
+.bill-amount .amount { color: var(--primary); font-weight: 800; }
+.bill-actions .btn-secondary, .bill-actions .btn-primary, .bill-actions .btn-success { 
+    min-width: 120px; 
+    max-width: 100%; /* Evitar que botones se salgan */
+}
+
+/* Realizar Pago */
+.payment-summary { background: var(--surface); border: 1px solid var(--outline-light); border-radius: 16px; box-shadow: var(--shadow-lg); padding: 20px; margin-bottom: 16px; }
+.payment-summary h4 { margin: 0 0 14px; font-size: 18px; font-weight: 800; }
+.payment-details { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.payment-details .payment-item { background: var(--surface-secondary); border: 1px solid var(--outline-light); border-radius: 12px; padding: 12px 14px; display: flex; justify-content: space-between; align-items: center; }
+.payment-details .payment-item.total { background: rgba(59,130,246,.08); border-color: rgba(59,130,246,.25); }
+.payment-details .bill-number { color: var(--primary); font-weight: 800; }
+.payment-details .amount { color: var(--primary); font-weight: 800; }
+.payment-details .due-date { color: var(--warning); font-weight: 700; }
+
+.payment-form-container { background: var(--surface); border: 1px solid var(--outline-light); border-radius: 16px; box-shadow: var(--shadow-lg); padding: 24px; }
+.payment-method-fields { background: var(--surface-secondary); border: 1px solid var(--outline-light); border-radius: 12px; padding: 16px; }
+.payment-item span:first-child { color: var(--on-surface-secondary); }
+.payment-item .amount { color: var(--primary); }
+.payment-info .info-notice h5 { margin: 12px 0 8px; font-size: 14px; font-weight: 800; }
+.payment-info ul { margin: 0; padding-left: 18px; }
+.payment-info li { margin: 4px 0; color: var(--on-surface-secondary); }
+
+/* Indicadores de seguridad */
+.security-notice {
+    background: rgba(16,185,129,0.08);
+    border: 1px solid rgba(16,185,129,0.2);
+    border-radius: 12px;
+    padding: 16px;
+    margin: 16px 0;
+}
+.security-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+.security-icon {
+    font-size: 18px;
+}
+.security-text {
+    font-weight: 700;
+    color: var(--success);
+}
+.security-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.security-features .feature {
+    font-size: 13px;
+    color: var(--on-surface-secondary);
+}
+
+/* Validación en tiempo real */
+.form-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+}
+
+/* Mis Propiedades */
+.properties-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.stat-card { background: var(--surface); border: 1px solid var(--outline-light); border-radius: 14px; padding: 12px; display: flex; align-items: center; gap: 10px; box-shadow: var(--shadow-md); }
+.stat-icon { font-size: 20px; }
+.stat-number { font-size: 18px; font-weight: 900; color: var(--on-surface); }
+.stat-label { font-size: 12px; color: var(--on-surface-secondary); }
+
+.properties-list { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); 
+    gap: 16px; 
+    max-width: 100%; /* Evitar overflow */
+    overflow-x: hidden; /* Prevenir scroll horizontal */
+}
+.property-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.property-title h3 { font-size: 16px; font-weight: 800; margin: 0; }
+.property-type { font-size: 12px; color: var(--on-surface-secondary); }
+.property-status { padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+.property-status.active { background: rgba(16,185,129,.12); color: var(--success); }
+.property-content { display: grid; grid-template-columns: 1.6fr 1fr; gap: 16px; }
+.property-info .info-item label { font-size: 12px; color: var(--on-surface-secondary); }
+.property-metrics .metric { background: var(--surface-secondary); border: 1px solid var(--outline-light); border-radius: 12px; padding: 12px; }
+.metric-label { font-size: 12px; color: var(--on-surface-secondary); }
+.metric-value { font-size: 14px; font-weight: 800; color: var(--on-surface); }
+.property-actions { display: flex; gap: 10px; justify-content: flex-end; }
+.properties-actions { display: flex; gap: 10px; margin-top: 16px; }
+
+/* Buttons variants */
+.btn-outline { background: transparent; border: 1.5px solid var(--outline); color: var(--on-surface); }
+.btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+.btn-secondary { background: #fff; border: 1.5px solid var(--outline); color: var(--on-surface); }
+.btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Tables-like layouts */
+.consumption-table, .consumption-table-full { display: grid; gap: 8px; }
+.consumption-table .table-header, .consumption-table-full .table-header { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; font-weight: 700; color: var(--on-surface); }
+.consumption-table .table-row, .consumption-table-full .table-row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; background: var(--surface-secondary); border: 1px solid var(--outline-light); border-radius: 8px; padding: 10px; }
+.consumption-difference.increase { color: var(--error); font-weight: 700; }
+.consumption-difference.decrease { color: var(--success); font-weight: 700; }
+.consumption-difference.same { color: var(--on-surface-secondary); }
+
+/* Buttons alignment */
+.report-actions, .bill-actions, .property-detail-actions, .history-actions, .report-actions-section { display: flex; gap: 10px; justify-content: flex-end; }
+
+/* Responsive tweaks */
+@media (max-width: 1024px) {
+    .property-content { grid-template-columns: 1fr; }
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .consumption-table .table-header, .consumption-table-full .table-header,
+    .consumption-table .table-row, .consumption-table-full .table-row { grid-template-columns: 1fr 1fr; }
+    
+    .bills-list, .properties-list {
+        grid-template-columns: 1fr; /* Una columna en móviles */
+    }
+    
+    .payment-details {
+        grid-template-columns: 1fr; /* Una columna en móviles */
+    }
+}
+
+/* Respeto a usuarios con reduce motion */
+@media (prefers-reduced-motion: reduce) {
+    .report-item, .bill-item, .property-card, .widget,
+    .btn-primary, .btn-secondary, .btn-success, .btn-outline {
+        transition: none !important;
+    }
+}
+
+
