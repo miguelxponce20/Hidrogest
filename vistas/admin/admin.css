@@ -36,14 +36,14 @@
   justify-content: space-between;
   align-items: center;
   padding: 16px 20px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid #FEFEFE;
 }
 
 .modal-header h3 {
   margin: 0;
   font-size: 18px;
   font-weight: 700;
-  color: #1c1c1e;
+  color: #062039;
 }
 
 .modal-close {
@@ -55,7 +55,8 @@
 }
 
 .modal-close:hover {
-  color: #1c1c1e;
+  color: #062039
+;
 }
 
 /* Body */
@@ -79,14 +80,14 @@
   margin-bottom: 6px;
   font-size: 14px;
   font-weight: 600;
-  color: #1c1c1e;
+  color: #062039;
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
   padding: 10px 14px;
-  border: 1px solid #d1d5db;
+  border: 1px solid #91D7F9;
   border-radius: 8px;
   font-size: 14px;
 }
@@ -105,7 +106,7 @@
 }
 
 .btn-primary {
-  background: #007aff;
+  background: #3990DD;
   color: white;
   border: none;
   padding: 10px 18px;
@@ -115,11 +116,11 @@
 }
 
 .btn-primary:hover {
-  background: #0056cc;
+  background: #062039;
 }
 
 .btn-secondary {
-  background: #f3f4f6;
+  background: #FEFEFE;
   border: 1px solid #d1d5db;
   padding: 10px 18px;
   border-radius: 8px;
@@ -162,18 +163,18 @@
 .users-table td {
   padding: 12px;
   text-align: left;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid #91D7F9;
   font-size: 14px;
 }
 
 .users-table th {
-  background: #f9fafb;
+  background: #3990DD;
   font-weight: 700;
   color: #1c1c1e;
 }
 
 .users-table tr:hover {
-  background: #f3f4f6;
+  background: #91D7F9;
 }
 
 .users-table td:last-child {
@@ -280,7 +281,7 @@
 
 .users-table thead {
   background: var(--primary);
-  color: white;
+  color: #FEFEFE;
 }
 
 .users-table th,
@@ -397,18 +398,18 @@
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  background: #fff;
+  background: #FEFEFE;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 .facturas-table thead {
-  background: linear-gradient(90deg, #2563eb, #3b82f6);
+  background: linear-gradient(90deg, #3990DD, #91D7F9);
 }
 
 .facturas-table th {
-  color: #fff;
+  color: #FEFEFE;
   padding: 14px 18px;
   font-size: 14px;
   font-weight: 600;
@@ -420,7 +421,7 @@
   padding: 14px 18px;
   font-size: 14px;
   color: #374151;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #FEFEFE;
 }
 
 /* Última fila sin borde */
@@ -433,7 +434,7 @@
   transition: all 0.2s ease;
 }
 .facturas-table tbody tr:hover {
-  background: #f9fafb;
+  background: #FEFEFE;
   transform: scale(1.01);
 }
 
@@ -472,12 +473,12 @@
 }
 
 .facturas-table .btn-sm.btn-secondary {
-  background: #2563eb;
+  background: #3990DD;
   color: #fff;
 }
 
 .facturas-table .btn-sm.btn-secondary:hover {
-  background: #1d4ed8;
+  background: #062039;
   transform: translateY(-1px);
   box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
 }
@@ -502,7 +503,7 @@
   width: 100%;
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid #d1d5db;
+  border: 1px solid #FEFEFE;
   font-size: 14px;
 }
 
@@ -517,7 +518,7 @@
   padding: 10px 12px;
   margin-bottom: 8px;
   border-radius: 8px;
-  background: #f9f9f9;
+  background: #FEFEFE;
   display: flex;
   align-items: center;
   font-size: 14px;
@@ -529,7 +530,7 @@
 }
 
 .widget ul li:hover {
-  background: #f0f4ff;
+  background: #91D7F9;
   cursor: pointer;
 }
 
@@ -539,4 +540,139 @@
 
 .widget-header-reportes {
   padding-bottom: 4px; /* opcional, un poco más de aire */
+}
+
+
+/* =========================
+   Tabla de propiedades mejorada
+   ========================= */
+.propiedades-table {
+  width: 100%;
+  margin-top: 16px;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  background: #FEFEFE;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Encabezado */
+.propiedades-table thead {
+  background: linear-gradient(90deg, #91D7F9, #3990DD);
+  color: #fff;
+}
+
+.propiedades-table th {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  padding: 14px 16px;
+}
+
+/* Celdas */
+.propiedades-table td {
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #91D7F9;
+  border-bottom: 1px solid #91D7F9;
+  vertical-align: middle;
+}
+
+/* Última fila sin borde */
+.propiedades-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Hover filas */
+.propiedades-table tbody tr:hover {
+  background: #FEFEFE;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: all 0.2s ease;
+}
+
+/* Badges de estado */
+.propiedades-table .badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.propiedades-table .badge.success {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(34,197,94,0.2);
+}
+
+.propiedades-table .badge.warning {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(34,197,94,0.2);
+}
+
+/* Botones dentro de la tabla */
+.propiedades-table .btn-sm {
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.propiedades-table .btn-sm.btn-secondary {
+  background: #3990DD;
+  color: #FEFEFE;
+}
+
+.propiedades-table .btn-sm.btn-secondary:hover {
+  background: #3990DD;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(37,99,235,0.3);
+}
+
+.calendar-day {
+  background: #FEFEFE;
+  color: #111;
+  border: 1px solid #91D7F9;
+  border-radius: 8px;
+  min-height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.calendar-day:hover {
+  background: #91D7F9;
+  cursor: pointer;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.calendar-day.empty {
+  background: transparent;
+  border: none;
+  cursor: default;
+  box-shadow: none;
+}
+
+.calendar-day.maintenance {
+  border: 2px solid #f59e0b; /* naranja */
+}
+
+.calendar-day.cut {
+  border: 2px solid #ef4444; /* rojo */
+}
+
+.calendar-day.supervision {
+  border: 2px solid #3990DD; /* azul */
 }

@@ -1,13 +1,13 @@
 /* CSS Variables */
 :root {
-    --primary: #007AFF;
-    --primary-light: #4DA3FF;
-    --primary-dark: #0056CC;
-    --surface: #FFFFFF;
+    --primary: #3990DD;
+    --primary-light: #91D7F9;
+    --primary-dark: #062039;
+    --surface: #FEFEFE;
     --surface-secondary: #F8F9FA;
     --surface-tertiary: #E9ECEF;
     --on-surface: #1C1C1E;
-    --on-surface-secondary: #6C6C70;
+    --on-surface-secondary: #4F6D85;
     --outline: #D1D5DB;
     --outline-light: #E5E7EB;
     --blue-50: #EFF6FF;

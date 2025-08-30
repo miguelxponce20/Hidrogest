@@ -8,7 +8,7 @@
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="/favicon/favicon-16x16.png"
+      href="../favicon/favicon-16x16.png"
     />
     <meta name="msapplication-TileColor" content="#ffffff" />
     <meta name="theme-color" content="#ffffff" />
@@ -62,6 +62,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="facturacion.html">💳 Facturación</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="admincalendario.html">📅 Calendario</a>
             </li>
           </ul>
         </div>
@@ -284,146 +287,148 @@
 
     <!-- Script Mapa -->
     <script>
-  const lat = 9.91152;
-  const lon = -67.35377;
+      const lat = 9.91152;
+      const lon = -67.35377;
 
-  const map = L.map("map").setView([lat, lon], 13);
+      const map = L.map("map").setView([lat, lon], 13);
 
-  // Capa base
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: "&copy; OpenStreetMap contributors",
-  }).addTo(map);
+      // Capa base
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap contributors",
+      }).addTo(map);
 
-  // Lista de zonas circulares iniciales
-  let zonas = [
-    {
-      nombre: "Zona Norte",
-      coords: [9.915, -67.355],
-      color: "red",
-      mensaje: "🔴 Problemas graves de agua",
-    },
-    {
-      nombre: "Zona Centro",
-      coords: [9.905, -67.36],
-      color: "orange",
-      mensaje: "🟡 Mantenimiento en proceso",
-    },
-    {
-      nombre: "Zona Sur",
-      coords: [9.92, -67.345],
-      color: "green",
-      mensaje: "🟢 Servicio normal",
-    },
-    {
-      nombre: "Zona Este",
-      coords: [9.918, -67.365],
-      color: "blue",
-      mensaje: "🔵 Zona en observación",
-    },
-    {
-      nombre: "Zona Oeste",
-      coords: [9.912, -67.338],
-      color: "purple",
-      mensaje: "🟣 Reporte técnico en revisión",
-    },
-  ];
+      // Lista de zonas circulares iniciales
+      let zonas = [
+        {
+          nombre: "Zona Norte",
+          coords: [9.915, -67.355],
+          color: "red",
+          mensaje: "🔴 Problemas graves de agua",
+        },
+        {
+          nombre: "Zona Centro",
+          coords: [9.905, -67.36],
+          color: "orange",
+          mensaje: "🟡 Mantenimiento en proceso",
+        },
+        {
+          nombre: "Zona Sur",
+          coords: [9.92, -67.345],
+          color: "green",
+          mensaje: "🟢 Servicio normal",
+        },
+        {
+          nombre: "Zona Este",
+          coords: [9.918, -67.365],
+          color: "blue",
+          mensaje: "🔵 Zona en observación",
+        },
+        {
+          nombre: "Zona Oeste",
+          coords: [9.912, -67.338],
+          color: "purple",
+          mensaje: "🟣 Reporte técnico en revisión",
+        },
+      ];
 
-  // Funciones de interactividad
-  function highlight(e) {
-    const layer = e.target;
-    layer.setStyle({
-      weight: 3,
-      fillOpacity: 0.6,
-    });
-  }
+      // Funciones de interactividad
+      function highlight(e) {
+        const layer = e.target;
+        layer.setStyle({
+          weight: 3,
+          fillOpacity: 0.6,
+        });
+      }
 
-  function resetHighlight(e) {
-    const layer = e.target;
-    layer.setStyle({
-      weight: 1,
-      fillOpacity: 0.3,
-    });
-  }
+      function resetHighlight(e) {
+        const layer = e.target;
+        layer.setStyle({
+          weight: 1,
+          fillOpacity: 0.3,
+        });
+      }
 
-  function zoomToFeature(e) {
-    map.fitBounds(e.target.getBounds());
-  }
+      function zoomToFeature(e) {
+        map.fitBounds(e.target.getBounds());
+      }
 
-  // Función para crear círculo con eventos
-  function crearZona(z) {
-    const circle = L.circle(z.coords, {
-      color: z.color,
-      fillColor: z.color,
-      fillOpacity: 0.3,
-      radius: 600, // metros
-    })
-      .addTo(map)
-      .bindPopup(`<b>${z.nombre}</b><br>${z.mensaje}`);
+      // Función para crear círculo con eventos
+      function crearZona(z) {
+        const circle = L.circle(z.coords, {
+          color: z.color,
+          fillColor: z.color,
+          fillOpacity: 0.3,
+          radius: 600, // metros
+        })
+          .addTo(map)
+          .bindPopup(`<b>${z.nombre}</b><br>${z.mensaje}`);
 
-    // Eventos
-    circle.on({
-      mouseover: highlight,
-      mouseout: resetHighlight,
-      click: zoomToFeature,
-    });
-  }
+        // Eventos
+        circle.on({
+          mouseover: highlight,
+          mouseout: resetHighlight,
+          click: zoomToFeature,
+        });
+      }
 
-  // Render inicial de zonas
-  zonas.forEach((z) => crearZona(z));
+      // Render inicial de zonas
+      zonas.forEach((z) => crearZona(z));
 
-  // ========= INTERACTIVIDAD CON MODAL =========
-  const modalZona = document.getElementById("modal-zona");
-  const formZona = document.getElementById("formZona");
+      // ========= INTERACTIVIDAD CON MODAL =========
+      const modalZona = document.getElementById("modal-zona");
+      const formZona = document.getElementById("formZona");
 
-  // Abrir modal al hacer click en el mapa
-  map.on("click", function (e) {
-    document.getElementById("zonaLat").value = e.latlng.lat;
-    document.getElementById("zonaLng").value = e.latlng.lng;
-    modalZona.classList.add("show");
-  });
+      // Abrir modal al hacer click en el mapa
+      map.on("click", function (e) {
+        document.getElementById("zonaLat").value = e.latlng.lat;
+        document.getElementById("zonaLng").value = e.latlng.lng;
+        modalZona.classList.add("show");
+      });
 
-  // Guardar nueva zona desde el modal
-  formZona.addEventListener("submit", (e) => {
-    e.preventDefault();
+      // Guardar nueva zona desde el modal
+      formZona.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-    const lat = parseFloat(document.getElementById("zonaLat").value);
-    const lng = parseFloat(document.getElementById("zonaLng").value);
-    const nombre = document.getElementById("nombreZona").value;
-    const estado = document.getElementById("estadoZona").value;
+        const lat = parseFloat(document.getElementById("zonaLat").value);
+        const lng = parseFloat(document.getElementById("zonaLng").value);
+        const nombre = document.getElementById("nombreZona").value;
+        const estado = document.getElementById("estadoZona").value;
 
-    let color = "blue";
-    let mensaje = "🔵 Zona en observación";
+        let color = "blue";
+        let mensaje = "🔵 Zona en observación";
 
-    if (estado === "rojo") {
-      color = "red";
-      mensaje = "🔴 Problemas graves de agua";
-    } else if (estado === "amarillo") {
-      color = "orange";
-      mensaje = "🟡 Mantenimiento en proceso";
-    } else if (estado === "verde") {
-      color = "green";
-      mensaje = "🟢 Servicio normal";
-    } else if (estado === "morado") {
-      color = "purple";
-      mensaje = "🟣 Reporte técnico en revisión";
-    }
+        if (estado === "rojo") {
+          color = "red";
+          mensaje = "🔴 Problemas graves de agua";
+        } else if (estado === "amarillo") {
+          color = "orange";
+          mensaje = "🟡 Mantenimiento en proceso";
+        } else if (estado === "verde") {
+          color = "green";
+          mensaje = "🟢 Servicio normal";
+        } else if (estado === "morado") {
+          color = "purple";
+          mensaje = "🟣 Reporte técnico en revisión";
+        }
 
-    const nuevaZona = { nombre, coords: [lat, lng], color, mensaje };
+        const nuevaZona = { nombre, coords: [lat, lng], color, mensaje };
 
-    zonas.push(nuevaZona);
-    crearZona(nuevaZona);
+        zonas.push(nuevaZona);
+        crearZona(nuevaZona);
 
-    modalZona.classList.remove("show"); // cerrar modal
-    formZona.reset();
-  });
+        modalZona.classList.remove("show"); // cerrar modal
+        formZona.reset();
+      });
 
-  // Cerrar modal
-  document.querySelectorAll("[data-close]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      document.getElementById(btn.getAttribute("data-close")).classList.remove("show");
-    });
-  });
-</script>
+      // Cerrar modal
+      document.querySelectorAll("[data-close]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .getElementById(btn.getAttribute("data-close"))
+            .classList.remove("show");
+        });
+      });
+    </script>
 
     <script>
       // Modal de Nuevo Reporte

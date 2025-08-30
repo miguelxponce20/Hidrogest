@@ -254,7 +254,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="./usuarios/calendario/calendario.html" class="nav-link">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <rect
                     x="3"
@@ -306,9 +306,13 @@
         </div>
 
         <div class="nav-section">
+          <h3 class="nav-title">Servicios</h3>
           <ul class="nav-list">
             <li class="nav-item">
-              <a href="./usuarios/incidencias/incidencias.html" class="nav-link">
+              <a
+                href="./usuarios/incidencias/incidencias.html"
+                class="nav-link"
+              >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M10.29 3.86L1.82 18A2 2 0 0 0 3.82 20H20.18A2 2 0 0 0 22.18 18L13.71 3.86A2 2 0 0 0 10.29 3.86Z"
@@ -342,7 +346,10 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="./usuarios/mis-reportes/mis-reportes.html" class="nav-link">
+              <a
+                href="./usuarios/mis-reportes/mis-reportes.html"
+                class="nav-link"
+              >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M14 2H6A2 2 0 0 0 4 4V20A2 2 0 0 0 6 22H18A2 2 0 0 0 20 20V8L14 2Z"
@@ -396,7 +403,7 @@
           <h3 class="nav-title">Propietarios</h3>
           <ul class="nav-list">
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="./usuarios/mis-facturas/mis-facturas.html" class="nav-link">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M14 2H6A2 2 0 0 0 4 4V20A2 2 0 0 0 6 22H18A2 2 0 0 0 20 20V8L14 2Z"
@@ -444,7 +451,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="./usuarios//realizar-pago/realizar-pago.html" class="nav-link">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M12 1V23"
@@ -465,7 +472,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="./usuarios/mis-propiedades/mis-propiedades.html" class="nav-link">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z"
@@ -492,7 +499,6 @@
 
     <!-- Contenido Principal -->
     <main class="main-content">
-      
       <!--Mapa -->
       <div
         id="map"
@@ -1385,11 +1391,80 @@
         attribution: "&copy; OpenStreetMap contributors",
       }).addTo(map);
 
-      // Marcador en San Juan de los Morros
-      L.marker([lat, lon])
-        .addTo(map)
-        .bindPopup("📍 San Juan de los Morros, Guárico - Venezuela")
-        .openPopup();
+      let zonas = [
+        {
+          nombre: "Zona Norte",
+          coords: [9.915, -67.355],
+          color: "red",
+          mensaje: "🔴 Problemas graves de agua",
+        },
+        {
+          nombre: "Zona Centro",
+          coords: [9.905, -67.36],
+          color: "orange",
+          mensaje: "🟡 Mantenimiento en proceso",
+        },
+        {
+          nombre: "Zona Sur",
+          coords: [9.92, -67.345],
+          color: "green",
+          mensaje: "🟢 Servicio normal",
+        },
+        {
+          nombre: "Zona Este",
+          coords: [9.918, -67.365],
+          color: "blue",
+          mensaje: "🔵 Zona en observación",
+        },
+        {
+          nombre: "Zona Oeste",
+          coords: [9.912, -67.338],
+          color: "purple",
+          mensaje: "🟣 Reporte técnico en revisión",
+        },
+      ];
+
+      function highlight(e) {
+        const layer = e.target;
+        layer.setStyle({
+          weight: 3,
+          fillOpacity: 0.6,
+        });
+      }
+
+      function resetHighlight(e) {
+        const layer = e.target;
+        layer.setStyle({
+          weight: 1,
+          fillOpacity: 0.3,
+        });
+      }
+
+      function zoomToFeature(e) {
+        map.fitBounds(e.target.getBounds());
+      }
+
+      function crearZona(z) {
+    const circle = L.circle(z.coords, {
+      color: z.color,
+      fillColor: z.color,
+      fillOpacity: 0.3,
+      radius: 600, // metros
+    })
+      .addTo(map)
+      .bindPopup(`<b>${z.nombre}</b><br>${z.mensaje}`);
+
+    // Eventos
+    circle.on({
+      mouseover: highlight,
+      mouseout: resetHighlight,
+      click: zoomToFeature,
+    });
+  }
+
+  // Render inicial de zonas
+  zonas.forEach((z) => crearZona(z));
+  
     </script>
   </body>
 </html>

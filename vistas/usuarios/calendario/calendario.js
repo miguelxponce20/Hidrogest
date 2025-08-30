@@ -517,9 +517,6 @@ function showIncidentModal() {
     showModal('incidentModal');
 }
 
-function showCalendarModal() {
-    showModal('calendarModal');
-}
 
 function showPaymentModal() {
     showModal('paymentModal');
@@ -553,9 +550,6 @@ function handleDeepLinkModals() {
             break;
         case 'notifications':
             showNotificationsModal();
-            break;
-        case 'calendar':
-            showCalendarModal();
             break;
     }
 }
@@ -728,52 +722,6 @@ function initCalendar() {
 }
 
 // Generate calendar
-function generateCalendar() {
-    const calendarGrid = document.getElementById('calendarGrid');
-    const currentMonth = document.getElementById('currentMonth');
-    
-    if (!calendarGrid || !currentMonth) return;
-    
-    const now = new Date();
-    const currentDate = new Date(now.getFullYear(), now.getMonth(), 1);
-    
-    // Update month display
-    const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-                       'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-    currentMonth.textContent = `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
-    
-    // Generate calendar days
-    const firstDay = currentDate.getDay();
-    const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
-    
-    let calendarHTML = '';
-    
-    // Add day headers
-   
-    
-    // Add empty days for first week
-    for (let i = 0; i < firstDay; i++) {
-        calendarHTML += '<div class="calendar-day other-month"></div>';
-    }
-    
-    // Add days of month
-    for (let day = 1; day <= daysInMonth; day++) {
-        let dayClass = 'calendar-day';
-        
-        // Add special classes for events
-        if (day === 15) {
-            dayClass += ' cut'; // Corte programado
-        } else if (day === 22) {
-            dayClass += ' maintenance'; // Mantenimiento
-               } else if (day === now.getDate() && currentDate.getMonth() === now.getMonth()) {
-            dayClass += ' event'; // Hoy
-        }
-        
-        calendarHTML += `<div class="${dayClass}">${day}</div>`;
-    }
-    
-    calendarGrid.innerHTML = calendarHTML;
-}
 
 // Navigate calendar months
 function navigateMonth(direction) {

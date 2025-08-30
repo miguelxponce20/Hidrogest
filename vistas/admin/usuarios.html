@@ -26,9 +26,7 @@
         </div>
       </div>
       <div class="header-center">
-        <h2>
-          Gestión de Usuarios
-        </h2>
+        <h2>Gestión de Usuarios</h2>
       </div>
       <div class="header-right">
         <div class="user-menu">
@@ -58,8 +56,11 @@
             <li class="nav-item">
               <a class="nav-link" href="reportes.html">📦 Reportes</a>
             </li>
-            <li class="nav-item ">
+            <li class="nav-item">
               <a class="nav-link" href="facturacion.html">💳 Facturación</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="admincalendario.html">📅 Calendario</a>
             </li>
           </ul>
         </div>
@@ -214,10 +215,46 @@
       </div>
     </div>
 
+    <!-- Modal: Ver Propiedades -->
+    <div id="modal-ver-propiedades" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>🏠 Propiedades del Usuario</h3>
+          <button class="modal-close" data-close="modal-ver-propiedades">
+            ✖
+          </button>
+        </div>
+        <div class="modal-body">
+          <table class="users-table propiedades-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Dirección</th>
+                <th>Ciudad</th>
+                <th>Ultima lectura</th>
+                <th>Costo Mensual</th>
+                <th>Consumo promedio</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="tablaPropiedades">
+              <!-- Filas dinámicas cargadas con JS -->
+            </tbody>
+          </table>
+          <div class="form-actions">
+            <button class="btn-secondary" data-close="modal-ver-propiedades">
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Toast -->
     <div id="toast" class="toast"></div>
 
     <!-- Script -->
+
     <script>
       const tabla = document.querySelector("#tablaUsuarios tbody");
       const modalNuevo = document.getElementById("modal-nuevo-usuario");
@@ -227,6 +264,47 @@
 
       let usuarioIndex = null; // Para editar/eliminar
 
+      let propertiesData = [
+        {
+          id: "CTR-2023-001",
+          name: "Casa Principal",
+          type: "Residencial",
+          address: "Calle Principal 123, Sector Norte, San Juan de los Morros",
+          contractNumber: "CTR-2023-001",
+          startDate: "15 Enero 2023",
+          lastReading: "1,250 m³ - 10 Dic 2024",
+          averageConsumption: "45 m³/mes",
+          monthlyCost: 42.6,
+          status: "active",
+          serviceStatus: "Excelente",
+          readings: [
+            { date: "10 Dic 2024", consumption: 1250, cost: 42.6 },
+            { date: "10 Nov 2024", consumption: 1205, cost: 38.2 },
+            { date: "10 Oct 2024", consumption: 1160, cost: 42.6 },
+            { date: "10 Sep 2024", consumption: 1115, cost: 35.8 },
+          ],
+        },
+        {
+          id: "CTR-2023-002",
+          name: "Apartamento Centro",
+          type: "Residencial",
+          address: "Av. Bolívar Norte 456, Centro, San Juan de los Morros",
+          contractNumber: "CTR-2023-002",
+          startDate: "20 Marzo 2023",
+          lastReading: "890 m³ - 8 Dic 2024",
+          averageConsumption: "32 m³/mes",
+          monthlyCost: 44.7,
+          status: "active",
+          serviceStatus: "Excelente",
+          readings: [
+            { date: "8 Dic 2024", consumption: 890, cost: 44.7 },
+            { date: "8 Nov 2024", consumption: 858, cost: 38.2 },
+            { date: "8 Oct 2024", consumption: 826, cost: 42.6 },
+            { date: "8 Sep 2024", consumption: 794, cost: 35.8 },
+          ],
+        },
+      ];
+
       // 🔹 Usuarios precargados
       let usuarios = [
         {
@@ -235,6 +313,7 @@
           correo: "juan@example.com",
           telefono: "0412-1234567",
           rol: "Administrador",
+          propiedades: propertiesData,
         },
         {
           cedula: "87654321",
@@ -242,13 +321,7 @@
           correo: "maria@example.com",
           telefono: "0414-7654321",
           rol: "Usuario",
-        },
-        {
-          cedula: "11223344",
-          nombre: "Carlos López",
-          correo: "carlos@example.com",
-          telefono: "0416-9988776",
-          rol: "Supervisor",
+          propiedades: [],
         },
       ];
 
@@ -273,6 +346,7 @@
             correo: document.getElementById("correo").value,
             telefono: document.getElementById("telefono").value,
             rol: document.getElementById("rol").value,
+            propiedades: [],
           };
 
           usuarios.push(nuevoUsuario);
@@ -296,6 +370,7 @@
         <td>${u.telefono}</td>
         <td>${u.rol}</td>
         <td>
+          <button class="btn-info btn-sm" onclick="verPropiedades(${index})">🏠 Propiedades</button>
           <button class="btn-secondary btn-sm" onclick="editarUsuario(${index})">✏ Editar</button>
           <button class="btn-danger btn-sm" onclick="eliminarUsuario(${index})">🗑 Eliminar</button>
         </td>
@@ -356,6 +431,36 @@
           modalConfirmar.classList.remove("show");
         });
 
+      //ver propiedades
+      window.verPropiedades = (index) => {
+        const propiedades = usuarios[index].propiedades || [];
+        const tbody = document.getElementById("tablaPropiedades");
+        tbody.innerHTML = "";
+
+        if (propiedades.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;color:#6c6c70;">⚠ No tiene propiedades registradas</td></tr>`;
+        } else {
+          propiedades.forEach((p) => {
+            const fila = document.createElement("tr");
+            fila.innerHTML = `
+        <td>${p.id}</td>
+        <td>${p.address}</td>
+        <td>${p.type}</td>
+        <td>${p.lastReading}</td>
+        <td>${p.averageConsumption}</td>
+        <td>$${p.monthlyCost.toFixed(2)}</td>
+        <td>
+          <span class="badge ${p.status === "Activo" ? "success" : "warning"}">
+            ${p.status}
+          </span>
+        </td>
+      `;
+            tbody.appendChild(fila);
+          });
+        }
+
+        document.getElementById("modal-ver-propiedades").classList.add("show");
+      };
       // Cerrar modales (X y botones cancelar)
       document.querySelectorAll("[data-close]").forEach((btn) => {
         btn.addEventListener("click", () => {

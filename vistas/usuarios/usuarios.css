@@ -2,7 +2,7 @@
 
 /* Consistent background for usuarios views */
 body {
-    background: linear-gradient(180deg, #f6f9fc 0%, #eef3f9 100%);
+    background: linear-gradient(180deg, #FEFEFE 0%, #eef3f9 100%);
 }
 
 /* Base containers - Asegurar que no interfiera con sidebar */
