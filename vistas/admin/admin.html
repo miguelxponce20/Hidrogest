@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin  Hidrogest</title>
-  <link
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Hidrogest</title>
+    <link
       rel="icon"
       type="image/png"
       sizes="16x16"
@@ -12,313 +12,454 @@
     />
     <meta name="msapplication-TileColor" content="#ffffff" />
     <meta name="theme-color" content="#ffffff" />
-  <link rel="stylesheet" href="../dashboard.css">
-  <link rel="stylesheet" href="admin.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-</head>
-<body>
-  <!-- Header -->
-  <header class="header">
-    <div class="header-left">
-      <div class="logo">
-        <img src="../LOGO.png" alt="Logo">
-        <span class="logo-text">AdminPanel</span>
+    <link rel="stylesheet" href="../dashboard.css" />
+    <link rel="stylesheet" href="admin.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <div class="logo">
+          <img src="../LOGO.png" alt="Logo" />
+          <span class="logo-text">AdminPanel</span>
+        </div>
       </div>
-    </div>
-    <div class="header-center">
-      <div class="search-bar">
-        <input type="text" placeholder="Buscar...">
-        <button class="search-btn">🔍</button>
+      <div class="header-center">
+        <div class="search-bar">
+          <input type="text" placeholder="Buscar..." />
+          <button class="search-btn">🔍</button>
+        </div>
       </div>
-    </div>
-    <div class="header-right">
-      
-      <div class="user-menu">
-        <button class="user-btn">
-          <div class="user-avatar">A</div>
-          <div class="user-info">
-            <span class="user-name">Admin</span>
-            <span class="user-type">Superuser</span>
+      <div class="header-right">
+        <div class="user-menu">
+          <button class="user-btn">
+            <div class="user-avatar">A</div>
+            <div class="user-info">
+              <span class="user-name">Admin</span>
+              <span class="user-type">Superuser</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <h4 class="nav-title">Principal</h4>
+          <ul class="nav-list">
+            <li class="nav-item active">
+              <a class="nav-link" href="admin.html">📊 Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="usuarios.html">👥 Usuarios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="reportes.html">📦 Reportes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="facturacion.html">💳 Facturación</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Mapa -->
+      <div class="widget">
+        <div class="widget-header">
+          <h3>Mapa de Operaciones</h3>
+        </div>
+        <div
+          id="map"
+          style="height: 300px; border-radius: 12px; margin-bottom: 20px"
+        ></div>
+      </div>
+
+      <!-- Grid de widgets -->
+      <div class="widgets-grid">
+        <div class="widget">
+          <div class="widget-header">
+            <h3>Usuarios activos</h3>
           </div>
-          
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <nav class="sidebar-nav">
-      <div class="nav-section">
-        <h4 class="nav-title">Principal</h4>
-        <ul class="nav-list">
-          <li class="nav-item active"><a class="nav-link" href="admin.html">📊 Dashboard</a></li>
-          <li class="nav-item"><a class="nav-link" href="usuarios.html">👥 Usuarios</a></li>
-          <li class="nav-item"><a class="nav-link" href="reportes.html">📦 Reportes</a></li>
-        </ul>
-      </div>
-    </nav>
-  </aside>
-
-  <!-- Main Content -->
-  <main class="main-content">
-    <!-- Mapa -->
-    <div class="widget">
-      <div class="widget-header">
-        <h3>Mapa de Operaciones</h3>
-      </div>
-       <div
-        id="map"
-        style="height: 300px; border-radius: 12px; margin-bottom: 20px"
-      ></div>
-    </div>
-
-    <!-- Grid de widgets -->
-    <div class="widgets-grid">
-      <div class="widget">
-        <div class="widget-header">
-          <h3>Usuarios activos</h3>
+          <p>Actualmente: <strong>154</strong> usuarios online</p>
         </div>
-        <p>Actualmente: <strong>154</strong> usuarios online</p>
-      </div>
-      <div class="widget">
-        <div class="widget-header">
-          <h3>Reportes recientes</h3>
+        <div class="widget">
+          <div class="widget-header">
+            <h3>Reportes recientes</h3>
+          </div>
+          <ul>
+            <li>🔴 Problemas graves de agua</li>
+            <li>🟡 Mantenimiento en proceso</li>
+            <li>🟢 Servicio normal</li>
+            <li>🔵 Zona en observación</li>
+            <li>🟣 Reporte técnico en revisión</li>
+          </ul>
         </div>
-        <ul>
-          <li>🔴 Corte en Zona Norte</li>
-          <li>🟡 Mantenimiento programado</li>
-          <li>🟢 Servicio restablecido</li>
-        </ul>
-      </div>
-      <div class="widget">
-        <div class="widget-header">
-          <h3>Acciones rápidas</h3>
-        </div>
-        <div class="actions-grid">
-          <button class="action-btn primary">
-            <span class="action-icon">➕</span>
-            <span class="action-text">Nuevo Reporte</span>
-          </button>
-          <button class="action-btn secondary">
-            <span class="action-icon">👥</span>
-            <span class="action-text">Gestionar Usuarios</span>
-          </button>
+        <div class="widget">
+          <div class="widget-header">
+            <h3>Acciones rápidas</h3>
+          </div>
+          <div class="actions-grid">
+            <button class="action-btn primary">
+              <span class="action-icon">➕</span>
+              <span class="action-text">Nuevo Reporte</span>
+            </button>
+            <button class="action-btn secondary">
+              <span class="action-icon">👥</span>
+              <span class="action-text">Gestionar Usuarios</span>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </main>
+    </main>
 
-  <!-- Modal: Nuevo Reporte -->
-<div id="modal-reporte" class="modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3>Nuevo Reporte</h3>
-      <button class="modal-close" data-close="modal-reporte">✖</button>
-    </div>
-    <div class="modal-body">
-      <form>
-        <div class="form-group">
-          <label for="titulo">Título</label>
-          <input type="text" id="titulo" placeholder="Ej: Corte en zona norte">
+    <!-- Modal: Nuevo Reporte -->
+    <div id="modal-reporte" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Nuevo Reporte</h3>
+          <button class="modal-close" data-close="modal-reporte">✖</button>
         </div>
-        <div class="form-group">
-          <label for="descripcion">Descripción</label>
-          <textarea id="descripcion" placeholder="Detalles..."></textarea>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="titulo">Título</label>
+              <input
+                type="text"
+                id="titulo"
+                placeholder="Ej: Corte en zona norte"
+              />
+            </div>
+            <div class="form-group">
+              <label for="descripcion">Descripción</label>
+              <textarea id="descripcion" placeholder="Detalles..."></textarea>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn-primary">Guardar</button>
+              <button
+                type="button"
+                class="btn-secondary"
+                data-close="modal-reporte"
+              >
+                Cancelar
+              </button>
+            </div>
+          </form>
         </div>
-        <div class="form-actions">
-          <button type="submit" class="btn-primary">Guardar</button>
-          <button type="button" class="btn-secondary" data-close="modal-reporte">Cancelar</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<!-- Notificación (Toast) -->
-<div id="toast" class="toast">Reporte aprobado ✅</div>
-
-<!-- Modal: Gestionar Usuarios -->
-<div id="modal-usuarios" class="modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3>Gestionar Usuarios</h3>
-      <button class="modal-close" data-close="modal-usuarios">✖</button>
-    </div>
-    <div class="modal-body">
-      <table class="users-table">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Correo</th>
-            <th>Rol</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Juan Pérez</td>
-            <td>juan@example.com</td>
-            <td>Administrador</td>
-            <td>
-              <button class="btn-secondary btn-sm">✏ Editar</button>
-              <button class="btn-danger btn-sm">🗑 Eliminar</button>
-            </td>
-          </tr>
-          <tr>
-            <td>María Gómez</td>
-            <td>maria@example.com</td>
-            <td>Usuario</td>
-            <td>
-              <button class="btn-secondary btn-sm">✏ Editar</button>
-              <button class="btn-danger btn-sm">🗑 Eliminar</button>
-            </td>
-          </tr>
-          <tr>
-            <td>Carlos López</td>
-            <td>carlos@example.com</td>
-            <td>Supervisor</td>
-            <td>
-              <button class="btn-secondary btn-sm">✏ Editar</button>
-              <button class="btn-danger btn-sm">🗑 Eliminar</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="form-actions">
-        <button class="btn-secondary" data-close="modal-usuarios">Cerrar</button>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- Modal: Confirmar Eliminación -->
-<div id="modal-confirmar" class="modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3>Confirmar eliminación</h3>
-      <button class="modal-close" data-close="modal-confirmar">✖</button>
-    </div>
-    <div class="modal-body">
-      <p>⚠ ¿Seguro que deseas eliminar este usuario?</p>
-      <div class="form-actions">
-        <button id="confirmarEliminar" class="btn-danger">Eliminar</button>
-        <button class="btn-secondary" data-close="modal-confirmar">Cancelar</button>
+    <!-- Notificación (Toast) -->
+    <div id="toast" class="toast">Reporte aprobado ✅</div>
+
+    <!-- Modal: Gestionar Usuarios -->
+    <div id="modal-usuarios" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Gestionar Usuarios</h3>
+          <button class="modal-close" data-close="modal-usuarios">✖</button>
+        </div>
+        <div class="modal-body">
+          <table class="users-table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Juan Pérez</td>
+                <td>juan@example.com</td>
+                <td>Administrador</td>
+                <td>
+                  <button class="btn-secondary btn-sm">✏ Editar</button>
+                  <button class="btn-danger btn-sm">🗑 Eliminar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>María Gómez</td>
+                <td>maria@example.com</td>
+                <td>Usuario</td>
+                <td>
+                  <button class="btn-secondary btn-sm">✏ Editar</button>
+                  <button class="btn-danger btn-sm">🗑 Eliminar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Carlos López</td>
+                <td>carlos@example.com</td>
+                <td>Supervisor</td>
+                <td>
+                  <button class="btn-secondary btn-sm">✏ Editar</button>
+                  <button class="btn-danger btn-sm">🗑 Eliminar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="form-actions">
+            <button class="btn-secondary" data-close="modal-usuarios">
+              Cerrar
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
+    <!-- Modal: Confirmar Eliminación -->
+    <div id="modal-confirmar" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Confirmar eliminación</h3>
+          <button class="modal-close" data-close="modal-confirmar">✖</button>
+        </div>
+        <div class="modal-body">
+          <p>⚠ ¿Seguro que deseas eliminar este usuario?</p>
+          <div class="form-actions">
+            <button id="confirmarEliminar" class="btn-danger">Eliminar</button>
+            <button class="btn-secondary" data-close="modal-confirmar">
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <!-- Script Mapa -->
+    <script>
+      const lat = 9.91152;
+      const lon = -67.35377;
 
-  <!-- Script Mapa -->
-  <script>
-    const lat = 9.91152;
-    const lon = -67.35377;
+      const map = L.map("map").setView([lat, lon], 13);
 
-    const map = L.map("map").setView([lat, lon], 13);
+      // Capa base
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap contributors",
+      }).addTo(map);
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "&copy; OpenStreetMap contributors"
-    }).addTo(map);
+      // Lista de zonas circulares iniciales
+      let zonas = [
+        {
+          nombre: "Zona Norte",
+          coords: [9.915, -67.355],
+          color: "red",
+          mensaje: "🔴 Problemas graves de agua",
+        },
+        {
+          nombre: "Zona Centro",
+          coords: [9.905, -67.36],
+          color: "orange",
+          mensaje: "🟡 Mantenimiento en proceso",
+        },
+        {
+          nombre: "Zona Sur",
+          coords: [9.92, -67.345],
+          color: "green",
+          mensaje: "🟢 Servicio normal",
+        },
+        {
+          nombre: "Zona Este",
+          coords: [9.918, -67.365],
+          color: "blue",
+          mensaje: "🔵 Zona en observación",
+        },
+        {
+          nombre: "Zona Oeste",
+          coords: [9.912, -67.338],
+          color: "purple",
+          mensaje: "🟣 Reporte técnico en revisión",
+        },
+      ];
 
-    L.marker([lat, lon]).addTo(map)
-      .bindPopup("📍 San Juan de los Morros, Guárico - Venezuela")
-      .openPopup();
-  </script>
+      // Funciones de interactividad
+      function highlight(e) {
+        const layer = e.target;
+        layer.setStyle({
+          weight: 3,
+          fillOpacity: 0.6,
+        });
+      }
 
-  <script>
-  // Modal de Nuevo Reporte
-  const modalReporte = document.getElementById("modal-reporte");
-  const toast = document.getElementById("toast");
+      function resetHighlight(e) {
+        const layer = e.target;
+        layer.setStyle({
+          weight: 1,
+          fillOpacity: 0.3,
+        });
+      }
 
-  // Interceptar el submit del formulario
-  modalReporte.querySelector("form").addEventListener("submit", e => {
-    e.preventDefault(); // Evita recargar
-    modalReporte.classList.remove("show"); // Cerrar modal
+      function zoomToFeature(e) {
+        map.fitBounds(e.target.getBounds());
+      }
 
-    // Mostrar toast
-    toast.classList.add("show");
+      // Función para crear círculo con eventos
+      function crearZona(z) {
+        const circle = L.circle(z.coords, {
+          color: z.color,
+          fillColor: z.color,
+          fillOpacity: 0.3,
+          radius: 600, // metros
+        })
+          .addTo(map)
+          .bindPopup(`<b>${z.nombre}</b><br>${z.mensaje}`);
 
-    // Ocultar automáticamente después de 3s
-    setTimeout(() => {
-      toast.classList.remove("show");
-    }, 3000);
-  });
-</script>
-  <script>
-  // Abrir modal según botón
-  document.querySelector(".action-btn.primary").addEventListener("click", () => {
-    document.getElementById("modal-reporte").classList.add("show");
-  });
+        // Eventos
+        circle.on({
+          mouseover: highlight,
+          mouseout: resetHighlight,
+          click: zoomToFeature,
+        });
+      }
 
-  document.querySelector(".action-btn.secondary").addEventListener("click", () => {
-    document.getElementById("modal-usuarios").classList.add("show");
-  });
+      // Render inicial de zonas
+      zonas.forEach((z) => crearZona(z));
 
-  document.querySelector(".action-btn.success").addEventListener("click", () => {
-    document.getElementById("modal-aprobar").classList.add("show");
-  });
+      // ➕ Agregar nuevas zonas con click en el mapa
+      map.on("click", function (e) {
+        const { lat, lng } = e.latlng;
 
-  // Cerrar modal
-  document.querySelectorAll("[data-close]").forEach(el => {
-    el.addEventListener("click", () => {
-      const id = el.getAttribute("data-close");
-      document.getElementById(id).classList.remove("show");
-    });
-  });
+        const nombre = prompt("📍 Nombre de la nueva zona:");
+        if (!nombre) return;
 
-  // Cerrar clickeando fuera
-  window.addEventListener("click", e => {
-    if (e.target.classList.contains("modal")) {
-      e.target.classList.remove("show");
-    }
-  });
-</script>
-<script>
-  let filaAEliminar = null; // Guardamos la fila seleccionada
+        const estado = prompt(
+          "Elige estado:\n1️⃣ Rojo (Problema)\n2️⃣ Amarillo (Mantenimiento)\n3️⃣ Verde (Normal)\n4️⃣ Azul (Observación)\n5️⃣ Morado (Revisión)"
+        );
 
-  // Cuando se pulsa en "Eliminar" en la tabla
-  document.querySelectorAll(".btn-danger.btn-sm").forEach(btn => {
-    btn.addEventListener("click", () => {
-      filaAEliminar = btn.closest("tr"); // Guardamos la fila
-      document.getElementById("modal-confirmar").classList.add("show");
-    });
-  });
+        let color = "blue";
+        let mensaje = "🔵 Zona en observación";
 
-  // Confirmar eliminación
-  document.getElementById("confirmarEliminar").addEventListener("click", () => {
-    if (filaAEliminar) {
-      filaAEliminar.remove(); // Elimina la fila
-      filaAEliminar = null;
-    }
-    document.getElementById("modal-confirmar").classList.remove("show");
-  });
+        if (estado === "1") {
+          color = "red";
+          mensaje = "🔴 Problemas graves de agua";
+        } else if (estado === "2") {
+          color = "orange";
+          mensaje = "🟡 Mantenimiento en proceso";
+        } else if (estado === "3") {
+          color = "green";
+          mensaje = "🟢 Servicio normal";
+        } else if (estado === "5") {
+          color = "purple";
+          mensaje = "🟣 Reporte técnico en revisión";
+        }
 
-  // Cerrar modal (X o botones con data-close)
-  document.querySelectorAll("[data-close]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const target = btn.getAttribute("data-close");
-      document.getElementById(target).classList.remove("show");
-    });
-  });
+        const nuevaZona = {
+          nombre,
+          coords: [lat, lng],
+          color,
+          mensaje,
+        };
 
-  // Cerrar clickeando fuera del contenido
-  window.addEventListener("click", e => {
-    if (e.target.classList.contains("modal")) {
-      e.target.classList.remove("show");
-    }
-  });
+        zonas.push(nuevaZona); // Guardar en lista
+        crearZona(nuevaZona); // Dibujar en el mapa
+      });
+    </script>
 
-  // Editar usuario (ejemplo simple con alert)
-  document.querySelectorAll(".btn-secondary.btn-sm").forEach(btn => {
-    btn.addEventListener("click", () => {
-      window.location.href = "usuarios.html";
-    });
-  });
-</script>
+    <script>
+      // Modal de Nuevo Reporte
+      const modalReporte = document.getElementById("modal-reporte");
+      const toast = document.getElementById("toast");
 
-</body>
+      // Interceptar el submit del formulario
+      modalReporte.querySelector("form").addEventListener("submit", (e) => {
+        e.preventDefault(); // Evita recargar
+        modalReporte.classList.remove("show"); // Cerrar modal
+
+        // Mostrar toast
+        toast.classList.add("show");
+
+        // Ocultar automáticamente después de 3s
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 3000);
+      });
+    </script>
+    <script>
+      // Abrir modal según botón
+      document
+        .querySelector(".action-btn.primary")
+        .addEventListener("click", () => {
+          document.getElementById("modal-reporte").classList.add("show");
+        });
+
+      document
+        .querySelector(".action-btn.secondary")
+        .addEventListener("click", () => {
+          document.getElementById("modal-usuarios").classList.add("show");
+        });
+
+      document
+        .querySelector(".action-btn.success")
+        .addEventListener("click", () => {
+          document.getElementById("modal-aprobar").classList.add("show");
+        });
+
+      // Cerrar modal
+      document.querySelectorAll("[data-close]").forEach((el) => {
+        el.addEventListener("click", () => {
+          const id = el.getAttribute("data-close");
+          document.getElementById(id).classList.remove("show");
+        });
+      });
+
+      // Cerrar clickeando fuera
+      window.addEventListener("click", (e) => {
+        if (e.target.classList.contains("modal")) {
+          e.target.classList.remove("show");
+        }
+      });
+    </script>
+    <script>
+      let filaAEliminar = null; // Guardamos la fila seleccionada
+
+      // Cuando se pulsa en "Eliminar" en la tabla
+      document.querySelectorAll(".btn-danger.btn-sm").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          filaAEliminar = btn.closest("tr"); // Guardamos la fila
+          document.getElementById("modal-confirmar").classList.add("show");
+        });
+      });
+
+      // Confirmar eliminación
+      document
+        .getElementById("confirmarEliminar")
+        .addEventListener("click", () => {
+          if (filaAEliminar) {
+            filaAEliminar.remove(); // Elimina la fila
+            filaAEliminar = null;
+          }
+          document.getElementById("modal-confirmar").classList.remove("show");
+        });
+
+      // Cerrar modal (X o botones con data-close)
+      document.querySelectorAll("[data-close]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const target = btn.getAttribute("data-close");
+          document.getElementById(target).classList.remove("show");
+        });
+      });
+
+      // Cerrar clickeando fuera del contenido
+      window.addEventListener("click", (e) => {
+        if (e.target.classList.contains("modal")) {
+          e.target.classList.remove("show");
+        }
+      });
+
+      // Editar usuario (ejemplo simple con alert)
+      document.querySelectorAll(".btn-secondary.btn-sm").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          window.location.href = "usuarios.html";
+        });
+      });
+    </script>
+  </body>
 </html>

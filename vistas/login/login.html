@@ -60,24 +60,34 @@
         </div>
     </div>
     
-    <script>
-        const submitBtn = document.getElementById('submitBtn');
-        const form = document.getElementById('loginForm');
-        const successOverlay = document.getElementById('successOverlay');
-        
-        // Form submission
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Show success overlay
-            successOverlay.classList.add('show');
-            
-            // Simulate login process (2 seconds)
-            setTimeout(() => {
-                // Redirect to dashboard
-                window.location.href = '../dashboard.html';
-            }, 2000);
-        });
-    </script>
+<script>
+  const form = document.getElementById('loginForm');
+  const successOverlay = document.getElementById('successOverlay');
+
+  // Credenciales exclusivas para admin
+  const adminEmail = "admin@hidrogest.com";
+  const adminPassword = "123456";
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    // Mostrar overlay de éxito siempre
+    successOverlay.classList.add('show');
+
+    // Verificar si es el admin
+    if (email === adminEmail && password === adminPassword) {
+      setTimeout(() => {
+        window.location.href = '../admin/admin.html';
+      }, 2000);
+    } else {
+      setTimeout(() => {
+        window.location.href = '../dashboard.html';
+      }, 2000);
+    }
+  });
+</script>
 </body>
 </html> 

@@ -336,3 +336,129 @@
   background: linear-gradient(135deg, #ef4444, #dc2626);
   box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3);
 }
+
+#listaMetodos li {
+  padding: 10px;
+  margin-bottom: 8px;
+  border: 1px solid var(--outline-light);
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#listaMetodos li strong {
+  color: var(--primary-dark);
+}
+
+#listaMetodos li button {
+  margin-left: 10px;
+}
+
+/* =========================
+   Tabla de Facturación
+   ========================= */
+.facturas-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.facturas-table thead {
+  background: linear-gradient(90deg, #2563eb, #3b82f6);
+}
+
+.facturas-table th {
+  color: #fff;
+  padding: 14px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.facturas-table td {
+  padding: 14px 18px;
+  font-size: 14px;
+  color: #374151;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Última fila sin borde */
+.facturas-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Hover filas */
+.facturas-table tbody tr {
+  transition: all 0.2s ease;
+}
+.facturas-table tbody tr:hover {
+  background: #f9fafb;
+  transform: scale(1.01);
+}
+
+/* Badges */
+.badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+}
+
+.badge.success {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+  box-shadow: 0 2px 6px rgba(34, 197, 94, 0.3);
+}
+
+.badge.warning {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: white;
+  box-shadow: 0 2px 6px rgba(249, 115, 22, 0.3);
+}
+
+/* Botón dentro de tabla */
+.facturas-table .btn-sm {
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 6px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.facturas-table .btn-sm.btn-secondary {
+  background: #2563eb;
+  color: #fff;
+}
+
+.facturas-table .btn-sm.btn-secondary:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+}
+
+/* Contenedor principal de widgets */
+.widgets-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Tabla más ancha que métodos */
+  gap: 20px;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+/* Responsivo: en pantallas pequeñas se apilan */
+@media (max-width: 992px) {
+  .widgets-grid {
+    grid-template-columns: 1fr;
+  }
+}
