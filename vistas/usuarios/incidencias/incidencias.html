@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mis Reportes - HIDROGEST</title>
+    <title>Reportar Incidencia - HIDROGEST</title>
     <link
       rel="icon"
       type="image/png"
@@ -19,7 +19,9 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../../dashboard.css" />
-    <link rel="stylesheet" href="../usuarios.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    
   </head>
   <body>
     <!-- Header Superior -->
@@ -307,8 +309,8 @@
         <div class="nav-section">
           <h3 class="nav-title">Servicios</h3>
           <ul class="nav-list">
-            <li class="nav-item">
-              <a href="../incidencias/incidencias.html" class="nav-link">
+            <li class="nav-item active">
+              <a href="#" class="nav-link">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M10.29 3.86L1.82 18A2 2 0 0 0 3.82 20H20.18A2 2 0 0 0 22.18 18L13.71 3.86A2 2 0 0 0 10.29 3.86Z"
@@ -341,8 +343,8 @@
                 <span>Reportar Incidencia</span>
               </a>
             </li>
-            <li class="nav-item active">
-              <a href="#" class="nav-link">
+            <li class="nav-item ">
+              <a href="../mis-reportes/mis-reportes.html" class="nav-link">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M14 2H6A2 2 0 0 0 4 4V20A2 2 0 0 0 6 22H18A2 2 0 0 0 20 20V8L14 2Z"
@@ -490,212 +492,118 @@
       </nav>
     </aside>
 
-    <!-- Contenido Principal -->
-    <main class="main-content">
-
-      <!-- Panel de Estado del Servicio -->
-      <section class="service-status-panel">
-        <div class="status-header">
-          <h2>Mis Reportes</h2>
-          <span class="last-update">Última actualización: hace 5 min</span>
+  <main class="main-content">
+      <section class="widget">
+        <div class="widget-header">
+          <h3>Reportar Incidencia</h3>
         </div>
-
-        <div class="status-grid">
-          <div class="status-card normal">
-            <div class="status-icon">📋</div>
-            <div class="status-info">
-              <h3>Reportes Totales</h3>
-              <p class="status-text">8</p>
-              <span class="status-description"
-                >Incidencias reportadas</span
-              >
-            </div>
+        <form id="incidentForm" class="modal-form">
+          <div class="form-group">
+            <label for="incidentType">Tipo de Incidencia <span class="required">*</span></label>
+            <select id="incidentType" name="incidentType" required>
+              <option value="">Seleccionar tipo</option>
+              <option value="corte">Corte de agua</option>
+              <option value="baja_presion">Baja presión</option>
+              <option value="agua_sucia">Agua sucia</option>
+              <option value="fuga">Fuga de agua</option>
+              <option value="otro">Otro</option>
+            </select>
           </div>
 
-          <div class="status-card warning">
-            <div class="status-icon">⏳</div>
-            <div class="status-info">
-              <h3>En Progreso</h3>
-              <p class="status-text">3</p>
-              <span class="status-description">Esperando resolución</span>
-            </div>
+          <div class="form-group">
+            <label for="incidentLocation">Ubicación <span class="required">*</span></label>
+            <input
+              type="text"
+              id="incidentLocation"
+              name="incidentLocation"
+              placeholder="Haz clic en el mapa o escribe la dirección"
+              required
+            />
           </div>
 
-          <div class="status-card success">
-            <div class="status-icon">✅</div>
-            <div class="status-info">
-              <h3>Resueltos</h3>
-              <p class="status-text">5</p>
-              <span class="status-description">Solucionados</span>
-            </div>
+          <!-- Mapa para seleccionar ubicación -->
+          <div class="form-group">
+            <label>Selecciona en el mapa</label>
+            <div id="incidentMap" class="map-container"></div>
           </div>
-        </div>
+
+          <div class="form-group">
+            <label for="incidentDescription">Descripción <span class="required">*</span></label>
+            <textarea
+              id="incidentDescription"
+              name="incidentDescription"
+              rows="4"
+              placeholder="Describe detalladamente la incidencia..."
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="incidentPriority">Prioridad</label>
+            <select id="incidentPriority" name="incidentPriority">
+              <option value="baja">Baja</option>
+              <option value="media" selected>Media</option>
+              <option value="alta">Alta</option>
+              <option value="urgente">Urgente</option>
+            </select>
+          </div>
+
+          <div class="form-actions">
+            <button type="reset" class="btn-secondary">Cancelar</button>
+            <button type="submit" class="btn-primary">Enviar Reporte</button>
+          </div>
+
+          <!-- Mensaje de éxito -->
+          <p id="successMessage" style="display:none; color:var(--success); font-weight:600; margin-top:10px;">
+            ✅ Tu incidencia ha sido reportada correctamente.
+          </p>
+        </form>
       </section>
-
-      <!-- Lista de Reportes -->
-      <div class="reports-list">
-        <!-- Reporte 1 -->
-        <div class="report-item pending" data-status="pending">
-          <div class="report-header">
-            <div class="report-id">#REP-2024-001</div>
-            <div class="report-status pending">Pendiente</div>
-          </div>
-          <div class="report-content">
-            <div class="report-info">
-              <h3>Corte de agua en Sector Norte</h3>
-              <p class="report-description">
-                Reporté falta de agua en mi residencia desde hace 2 días. El suministro se cortó sin previo aviso.
-              </p>
-              <div class="report-meta">
-                <span class="report-type">Tipo: Corte de agua</span>
-                <span class="report-priority high">Prioridad: Alta</span>
-                <span class="report-location">Ubicación: Casa Principal - Sector Norte</span>
-              </div>
-            </div>
-            <div class="report-timeline">
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                  <span class="timeline-date">15 Dic 2024, 10:30 AM</span>
-                  <span class="timeline-text">Reporte creado</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="report-actions">
-            <button class="btn-secondary" onclick="viewReport('REP-2024-001')">
-              Ver Detalles
-            </button>
-            <button class="btn-primary" onclick="followUpReport('REP-2024-001')">
-              Seguir Reporte
-            </button>
-          </div>
-        </div>
-
-        <!-- Reporte 2 -->
-        <div class="report-item in-progress" data-status="in-progress">
-          <div class="report-header">
-            <div class="report-id">#REP-2024-002</div>
-            <div class="report-status in-progress">En Progreso</div>
-          </div>
-          <div class="report-content">
-            <div class="report-info">
-              <h3>Baja presión del agua</h3>
-              <p class="report-description">
-                La presión del agua ha disminuido considerablemente en las últimas semanas, especialmente por las mañanas.
-              </p>
-              <div class="report-meta">
-                <span class="report-type">Tipo: Baja presión</span>
-                <span class="report-priority medium">Prioridad: Media</span>
-                <span class="report-location">Ubicación: Apartamento - Centro</span>
-              </div>
-            </div>
-            <div class="report-timeline">
-              <div class="timeline-item">
-                <div class="timeline-dot active"></div>
-                <div class="timeline-content">
-                  <span class="timeline-date">14 Dic 2024, 3:15 PM</span>
-                  <span class="timeline-text">Técnico asignado</span>
-                </div>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                  <span class="timeline-date">13 Dic 2024, 9:45 AM</span>
-                  <span class="timeline-text">Reporte creado</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="report-actions">
-            <button class="btn-secondary" onclick="viewReport('REP-2024-002')">
-              Ver Detalles
-            </button>
-            <button class="btn-primary" onclick="contactTechnician('REP-2024-002')">
-              Contactar Técnico
-            </button>
-          </div>
-        </div>
-
-        <!-- Reporte 3 -->
-        <div class="report-item resolved" data-status="resolved">
-          <div class="report-header">
-            <div class="report-id">#REP-2024-003</div>
-            <div class="report-status resolved">Resuelto</div>
-          </div>
-          <div class="report-content">
-            <div class="report-info">
-              <h3>Agua con olor extraño</h3>
-              <p class="report-description">
-                El agua salía con un olor fuerte a cloro. Ya fue solucionado.
-              </p>
-              <div class="report-meta">
-                <span class="report-type">Tipo: Agua sucia</span>
-                <span class="report-priority medium">Prioridad: Media</span>
-                <span class="report-location">Ubicación: Casa Principal - Sector Norte</span>
-              </div>
-            </div>
-            <div class="report-timeline">
-              <div class="timeline-item">
-                <div class="timeline-dot completed"></div>
-                <div class="timeline-content">
-                  <span class="timeline-date">12 Dic 2024, 2:30 PM</span>
-                  <span class="timeline-text">Problema resuelto</span>
-                </div>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-dot completed"></div>
-                <div class="timeline-content">
-                  <span class="timeline-date">11 Dic 2024, 11:00 AM</span>
-                  <span class="timeline-text">Trabajo realizado</span>
-                </div>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-dot completed"></div>
-                <div class="timeline-content">
-                  <span class="timeline-date">10 Dic 2024, 8:20 AM</span>
-                  <span class="timeline-text">Reporte creado</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="report-actions">
-            <button class="btn-secondary" onclick="viewReport('REP-2024-003')">
-              Ver Detalles
-            </button>
-            <button class="btn-success" onclick="rateService('REP-2024-003')">
-              Calificar Servicio
-            </button>
-          </div>
-        </div>
-      </div>
     </main>
 
-    <!-- Modal de Detalles del Reporte -->
-    <div class="modal" id="reportModal">
-      <div class="modal-overlay" id="reportModalOverlay"></div>
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Detalles del Reporte</h3>
-          <button class="modal-close" id="reportModalClose">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M18 6L6 18M6 6L18 18"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
-        </div>
-        <div class="modal-body" id="reportModalBody">
-          <!-- El contenido se cargará dinámicamente -->
-        </div>
-      </div>
-    </div>
+    <script>
+      // --- Inicializar mapa en San Juan de los Morros (Guárico, Venezuela) ---
+      const map = L.map('incidentMap').setView([9.91152, -67.3538], 14);
 
-    <script src="../../dashboard.js"></script>
-    <script src="./mis-reportes.js"></script>
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+
+      let marker;
+
+      // Función para obtener dirección (reverse geocoding con Nominatim)
+      async function getAddress(lat, lng) {
+        const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`;
+        try {
+          const res = await fetch(url);
+          const data = await res.json();
+          // Devolver la calle, avenida o dirección legible
+          return data.display_name || `Lat: ${lat}, Lng: ${lng}`;
+        } catch (err) {
+          return `Lat: ${lat}, Lng: ${lng}`;
+        }
+      }
+
+      // Evento click en el mapa
+      map.on('click', async function (e) {
+        if (marker) map.removeLayer(marker);
+        marker = L.marker(e.latlng).addTo(map);
+
+        const address = await getAddress(e.latlng.lat, e.latlng.lng);
+        document.getElementById("incidentLocation").value = address;
+      });
+
+      // --- Manejo del formulario ---
+      const form = document.getElementById("incidentForm");
+      const successMessage = document.getElementById("successMessage");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        successMessage.style.display = "block";
+        form.reset();
+        if (marker) map.removeLayer(marker);
+      });
+    </script>
+     <script src="../../dashboard.js"></script>
   </body>
 </html>
