@@ -23,7 +23,7 @@
 .modal-content {
   background: #fff;
   width: 90%;
-  max-width: 500px;
+  max-width: 550px;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   overflow: hidden;
@@ -175,6 +175,21 @@
 .users-table tr:hover {
   background: #f3f4f6;
 }
+
+.users-table td:last-child {
+  white-space: normal;       /* permite que los botones se apilen */
+  text-align: center;        /* centra los botones horizontalmente */
+  display: flex;             /* hace un contenedor flexible */
+  flex-direction: column;    /* apila los elementos verticalmente */
+  gap: 8px;                  /* separación entre botones */
+}
+
+.users-table td:last-child .btn-sm {
+  width: 100%;               /* todos los botones ocupan el ancho completo de la celda */
+  max-width: 130px;          /* opcional: limita ancho máximo para no quedar muy grande */
+  text-align: center;        /* centra el texto dentro del botón */
+}
+
 
 /* Botones pequeños */
 .btn-sm {
@@ -338,22 +353,42 @@
 }
 
 #listaMetodos li {
-  padding: 10px;
+  padding: 10px 14px;
   margin-bottom: 8px;
   border: 1px solid var(--outline-light);
   border-radius: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
 }
 
+
 #listaMetodos li strong {
+  flex: 1;
   color: var(--primary-dark);
 }
 
+
 #listaMetodos li button {
-  margin-left: 10px;
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary-light);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
+
+#listaMetodos li button:hover {
+  background: var(--primary-dark);
+}
+
 
 /* =========================
    Tabla de Facturación
@@ -450,10 +485,10 @@
 /* Contenedor principal de widgets */
 .widgets-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr; /* Tabla más ancha que métodos */
-  gap: 20px;
-  align-items: flex-start;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 20px;
   margin-top: 20px;
+  align-items: stretch;
 }
 
 /* Responsivo: en pantallas pequeñas se apilan */
@@ -469,4 +504,39 @@
   border-radius: 8px;
   border: 1px solid #d1d5db;
   font-size: 14px;
+}
+
+/* Lista de reportes */
+.widget ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.widget ul li {
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  background: #f9f9f9;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.widget ul li:last-child {
+  margin-bottom: 0;
+}
+
+.widget ul li:hover {
+  background: #f0f4ff;
+  cursor: pointer;
+}
+
+.widget-header-reportes h3 {
+  margin: 0 0 12px 0; /* 12px abajo, puedes ajustar a 16px o 20px */
+}
+
+.widget-header-reportes {
+  padding-bottom: 4px; /* opcional, un poco más de aire */
 }
