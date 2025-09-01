@@ -1,0 +1,495 @@
+/* CSS específico para la vista de Mi Perfil */
+/* Estilos únicos para la gestión del perfil de usuario */
+
+.perfil-main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 30px;
+  padding-top: 80px;
+  background: var(--surface-secondary);
+  box-sizing: border-box;
+}
+
+.perfil-card {
+  background: var(--surface);
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  padding: 40px;
+  width: 100%;
+  max-width: 1000px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 40px;
+}
+
+.perfil-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.foto-wrapper {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  margin-bottom: 20px;
+}
+
+.foto-wrapper img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid var(--primary);
+  transition: all 0.3s ease;
+}
+
+.foto-wrapper:hover img {
+  border-color: var(--primary-light);
+  transform: scale(1.02);
+}
+
+.cambiar-foto {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+}
+
+.cambiar-foto:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.perfil-nombre {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--on-surface);
+  margin: 0;
+}
+
+.perfil-rol {
+  font-size: 16px;
+  color: var(--on-surface-secondary);
+  margin: 4px 0 0 0;
+  background: var(--surface-secondary);
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+/* Formulario de perfil */
+.perfil-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.form-section {
+  background: var(--surface-secondary);
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid var(--outline-light);
+}
+
+.form-section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--on-surface);
+  margin: 0 0 20px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--primary);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--on-surface);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 12px 16px;
+  border: 1px solid var(--outline);
+  border-radius: 12px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  background: var(--surface);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-row .form-group {
+  margin-bottom: 0;
+}
+
+/* Información de contacto */
+.contacto-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.contacto-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--surface);
+  border-radius: 12px;
+  border: 1px solid var(--outline-light);
+}
+
+.contacto-item-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--primary);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 16px;
+}
+
+.contacto-item-content h5 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--on-surface);
+  margin: 0 0 2px 0;
+}
+
+.contacto-item-content p {
+  font-size: 12px;
+  color: var(--on-surface-secondary);
+  margin: 0;
+}
+
+/* Preferencias */
+.preferencias-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.preferencia-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: var(--surface);
+  border-radius: 12px;
+  border: 1px solid var(--outline-light);
+}
+
+.preferencia-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--primary);
+}
+
+.preferencia-info h5 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--on-surface);
+  margin: 0 0 4px 0;
+}
+
+.preferencia-info p {
+  font-size: 12px;
+  color: var(--on-surface-secondary);
+  margin: 0;
+}
+
+/* Botones de acción */
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--outline-light);
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 14px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+  background: var(--surface-secondary);
+  color: var(--on-surface);
+  border: 1px solid var(--outline);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-tertiary);
+  border-color: var(--primary);
+}
+
+/* Estados de carga y confirmación */
+.loading-state {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.success-message {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.success-message .icon {
+  color: var(--success);
+  font-size: 20px;
+}
+
+.success-message .content h5 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--success);
+  margin: 0 0 4px 0;
+}
+
+.success-message .content p {
+  font-size: 12px;
+  color: var(--on-surface-secondary);
+  margin: 0;
+}
+
+/* Modal de cambio de foto */
+.foto-modal .modal-content {
+  max-width: 400px;
+  text-align: center;
+}
+
+.foto-modal .modal-body {
+  padding: 24px;
+}
+
+.foto-preview {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 20px;
+  border: 3px solid var(--primary);
+}
+
+.foto-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.foto-btn {
+  padding: 12px 16px;
+  border: 1px solid var(--outline);
+  border-radius: 8px;
+  background: var(--surface-secondary);
+  color: var(--on-surface);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.foto-btn:hover {
+  background: var(--surface-tertiary);
+  border-color: var(--primary);
+}
+
+.foto-btn.primary {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.foto-btn.primary:hover {
+  background: var(--primary-dark);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .perfil-card {
+    grid-template-rows: auto 1fr;
+    padding: 30px;
+  }
+
+  .perfil-form {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .foto-wrapper {
+    width: 200px;
+    height: 200px;
+  }
+
+  .perfil-nombre {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .perfil-main {
+    padding: 20px 10px;
+    padding-top: 60px;
+  }
+
+  .perfil-card {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .foto-wrapper {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 15px;
+  }
+
+  .perfil-nombre {
+    font-size: 20px;
+  }
+
+  .perfil-form {
+    gap: 15px;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 16px; /* Evitar zoom en iOS */
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .contacto-info {
+    grid-template-columns: 1fr;
+  }
+
+  .preferencias-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .perfil-main {
+    padding: 15px 8px;
+    padding-top: 50px;
+  }
+
+  .perfil-card {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .foto-wrapper {
+    width: 120px;
+    height: 120px;
+  }
+
+  .perfil-nombre {
+    font-size: 18px;
+  }
+
+  .perfil-form {
+    gap: 12px;
+  }
+
+  .form-section {
+    padding: 16px;
+  }
+
+  .form-section-title {
+    font-size: 16px;
+  }
+
+  .foto-modal .modal-content {
+    margin: 10px;
+    max-width: calc(100vw - 20px);
+  }
+
+  .foto-preview {
+    width: 120px;
+    height: 120px;
+  }
+}

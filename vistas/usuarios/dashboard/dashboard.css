@@ -1,0 +1,1072 @@
+/* Dashboard Specific Styles */
+
+/* Map Container */
+#map {
+    height: 300px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--outline-light);
+}
+
+/* Required field indicator */
+.required {
+    color: var(--error);
+    font-weight: 600;
+}
+
+/* Summary info styling */
+.summary-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Modal close button for better accessibility */
+.modal-close {
+    padding: 8px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+}
+
+.modal-close:hover {
+    background: var(--surface-secondary);
+    transform: scale(1.1);
+}
+
+/* Form validation states */
+.form-group input:invalid,
+.form-group select:invalid,
+.form-group textarea:invalid {
+    border-color: var(--error);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.form-group input:valid,
+.form-group select:valid,
+.form-group textarea:valid {
+    border-color: var(--success);
+}
+
+/* Disabled states */
+.form-group input:disabled,
+.form-group select:disabled,
+.form-group textarea:disabled {
+    background: var(--surface-secondary);
+    color: var(--on-surface-secondary);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Focus within for better form navigation */
+.form-group:focus-within {
+    position: relative;
+}
+
+.form-group:focus-within::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 2px solid var(--primary);
+    border-radius: 10px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Loading states */
+.btn:disabled,
+.action-btn:disabled,
+.billing-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Better spacing for mobile */
+@media (max-width: 768px) {
+    #map {
+        height: 250px;
+        margin: 16px 0;
+    }
+
+    .modal-close {
+        width: 40px;
+        height: 40px;
+        padding: 10px;
+    }
+}
+
+/* Service Status Panel */
+.service-status-panel {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--outline-light);
+}
+
+.status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.status-header h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.last-update {
+    font-size: 12px;
+    color: var(--on-surface-secondary);
+}
+
+.status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.status-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--outline-light);
+    transition: all 0.2s ease;
+}
+
+.status-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.status-card.normal {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+    border-color: rgba(16, 185, 129, 0.2);
+}
+
+.status-card.warning {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+    border-color: rgba(245, 158, 11, 0.2);
+}
+
+.status-card.info {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+    border-color: rgba(59, 130, 246, 0.2);
+}
+
+.status-icon {
+    font-size: 32px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+}
+
+.status-info h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--on-surface-secondary);
+    margin-bottom: 4px;
+}
+
+.status-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin-bottom: 4px;
+}
+
+.status-description {
+    font-size: 12px;
+    color: var(--on-surface-secondary);
+}
+
+/* Widgets Grid */
+.widgets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.widget {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--outline-light);
+    transition: all 0.2s ease;
+}
+
+.widget:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl);
+}
+
+.widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.widget-header h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.widget-action {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.widget-action:hover {
+    background: var(--blue-50);
+}
+
+/* Notifications Widget */
+.notifications-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.notification-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+    background: var(--surface-secondary);
+    transition: all 0.2s ease;
+}
+
+.notification-item:hover {
+    background: var(--surface-tertiary);
+}
+
+.notification-item.unread {
+    background: var(--blue-50);
+    border-left: 4px solid var(--primary);
+}
+
+.notification-icon {
+    font-size: 20px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.notification-icon.warning {
+    background: rgba(245, 158, 11, 0.1);
+}
+
+.notification-icon.info {
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.notification-icon.success {
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.notification-content {
+    flex: 1;
+}
+
+.notification-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--on-surface);
+    margin-bottom: 4px;
+    line-height: 1.4;
+}
+
+.notification-time {
+    font-size: 12px;
+    color: var(--on-surface-secondary);
+}
+
+/* Actions Widget */
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+}
+
+.action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 16px;
+    border: 1px solid var(--outline-light);
+    border-radius: 12px;
+    background: var(--surface);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+}
+
+.action-btn.primary {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.action-btn.primary:hover {
+    background: var(--primary-dark);
+}
+
+.action-btn.secondary:hover {
+    background: var(--blue-50);
+    border-color: var(--primary-light);
+}
+
+.action-btn.success {
+    background: var(--success);
+    color: white;
+    border-color: var(--success);
+}
+
+.action-btn.success:hover {
+    background: #059669;
+}
+
+.action-icon {
+    font-size: 24px;
+}
+
+.action-text {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* User Info Grid */
+.user-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 24px;
+}
+
+/* Billing Widget */
+.billing-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.billing-stat {
+    text-align: center;
+    padding: 16px;
+    background: var(--surface-secondary);
+    border-radius: 12px;
+}
+
+.stat-label {
+    display: block;
+    font-size: 12px;
+    color: var(--on-surface-secondary);
+    margin-bottom: 8px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.billing-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.billing-btn {
+    flex: 1;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.billing-btn.primary {
+    background: var(--primary);
+    color: white;
+}
+
+.billing-btn.primary:hover {
+    background: var(--primary-dark);
+}
+
+.billing-btn.secondary {
+    background: var(--surface-secondary);
+    color: var(--on-surface);
+    border: 1px solid var(--outline);
+}
+
+.billing-btn.secondary:hover {
+    background: var(--surface-tertiary);
+}
+
+/* Properties Widget */
+.properties-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.property-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: var(--surface-secondary);
+    border-radius: 12px;
+}
+
+.property-info h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--on-surface);
+    margin-bottom: 4px;
+}
+
+.property-location {
+    font-size: 12px;
+    color: var(--on-surface-secondary);
+}
+
+.property-status {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.property-status.active {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+}
+
+.map-container {
+    height: 300px;
+    border-radius: 16px;
+    margin: 20px;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+/* Dashboard Specific Modals */
+
+/* Notifications Modal */
+.notifications-filters {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.notifications-list-full {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.notification-mark-read {
+    background: var(--success);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.notification-mark-read:hover {
+    background: #059669;
+    transform: scale(1.1);
+}
+
+/* Incident Modal */
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Calendar Modal */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-nav {
+    background: var(--surface-secondary);
+    border: 1px solid var(--outline);
+    color: var(--on-surface);
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.calendar-nav:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.calendar-header h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--on-surface);
+    margin: 0;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--outline-light);
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.calendar-day.header {
+    background: var(--surface-secondary);
+    font-weight: 600;
+    color: var(--on-surface-secondary);
+    cursor: default;
+}
+
+.calendar-day:hover {
+    background: var(--surface-secondary);
+}
+
+.calendar-day.other-month {
+    color: var(--on-surface-secondary);
+    background: var(--surface-tertiary);
+}
+
+.calendar-day.event {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.calendar-day.maintenance {
+    background: var(--warning);
+    color: white;
+    border-color: var(--warning);
+}
+
+.calendar-day.cut {
+    background: var(--error);
+    color: white;
+    border-color: var(--error);
+}
+
+.calendar-legend {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--on-surface-secondary);
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+}
+
+.legend-color.normal {
+    background: var(--primary);
+}
+
+.legend-color.maintenance {
+    background: var(--warning);
+}
+
+.legend-color.cut {
+    background: var(--error);
+}
+
+/* Bills Modal */
+.bills-filters {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.bills-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.summary-card {
+    background: var(--surface-secondary);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid var(--outline-light);
+}
+
+.summary-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.summary-label {
+    display: block;
+    font-size: 12px;
+    color: var(--on-surface-secondary);
+    margin-bottom: 4px;
+}
+
+.summary-value {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.bills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.bill-item {
+    background: var(--surface);
+    border: 1px solid var(--outline-light);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.2s ease;
+}
+
+.bill-item:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--outline);
+}
+
+.bill-item.pending {
+    border-left: 4px solid var(--warning);
+}
+
+.bill-item.paid {
+    border-left: 4px solid var(--success);
+}
+
+.bill-item.overdue {
+    border-left: 4px solid var(--error);
+}
+
+.bill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.bill-number {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--on-surface-secondary);
+}
+
+.bill-status {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.bill-status.pending {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--warning);
+}
+
+.bill-status.paid {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+}
+
+.bill-status.overdue {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--error);
+}
+
+.bill-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.bill-info h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--on-surface);
+    margin: 0 0 8px 0;
+}
+
+.bill-period,
+.bill-property {
+    font-size: 14px;
+    color: var(--on-surface-secondary);
+    margin: 0 0 4px 0;
+}
+
+.bill-amount {
+    text-align: right;
+}
+
+.bill-amount .amount {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 4px;
+}
+
+.bill-amount .due-date {
+    font-size: 12px;
+    color: var(--warning);
+}
+
+.bill-amount .paid-date {
+    font-size: 12px;
+    color: var(--success);
+}
+
+.bill-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+/* Payment Modal */
+.payment-summary {
+    background: var(--surface-secondary);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.payment-summary h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--on-surface);
+    margin: 0 0 16px 0;
+}
+
+.payment-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.payment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+
+.payment-item.total {
+    border-top: 1px solid var(--outline-light);
+    padding-top: 12px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.amount {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.due-date {
+    color: var(--warning);
+    font-weight: 500;
+}
+
+/* Payment Method Fields */
+.payment-method-fields {
+    border: 1px solid var(--outline-light);
+    border-radius: 12px;
+    padding: 20px;
+    background: var(--surface-secondary);
+    margin-bottom: 20px;
+}
+
+.payment-method-fields h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--on-surface);
+    margin: 0 0 16px 0;
+}
+
+/* Settings Modal */
+.settings-section {
+    margin-bottom: 24px;
+}
+
+.settings-section h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--on-surface);
+    margin: 0 0 16px 0;
+}
+
+.setting-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--outline);
+    transition: 0.3s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--primary);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Help Modal */
+.help-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.help-section h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--on-surface);
+    margin: 0 0 12px 0;
+}
+
+.help-section p {
+    font-size: 14px;
+    color: var(--on-surface-secondary);
+    margin: 0 0 8px 0;
+    line-height: 1.5;
+}
+
+.help-contact {
+    background: var(--surface-secondary);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.help-contact h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--on-surface);
+    margin: 0 0 16px 0;
+}
+
+.help-contact p {
+    font-size: 14px;
+    color: var(--on-surface-secondary);
+    margin: 0 0 8px 0;
+}
+
+/* Dashboard Specific Responsive */
+@media (max-width: 1200px) {
+    .widgets-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .user-info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .status-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .billing-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .billing-actions {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .calendar-grid {
+        gap: 4px;
+    }
+
+    .calendar-day {
+        font-size: 12px;
+    }
+
+    .calendar-legend {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .bill-details {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .bill-amount {
+        text-align: left;
+    }
+}
+
+/* Dashboard Animations */
+@keyframes slideInFromTop {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.service-status-panel,
+.widget,
+.user-info-grid {
+    animation: slideInFromTop 0.6s ease-out;
+}
+
+.status-card,
+.notification-item,
+.action-btn,
+.billing-stat,
+.property-item {
+    animation: fadeIn 0.8s ease-out;
+}

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reportes - Admin Hidrogest</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="stylesheet" href="../dashboard.css" />
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <div class="logo">
+          <img src="../LOGO.png" alt="Logo" />
+          <span class="logo-text">AdminPanel</span>
+        </div>
+      </div>
+      <div class="header-center">
+        <h2>
+          Gestión de Reportes
+        </h2>
+      </div>
+      <div class="header-right">
+        <div class="user-menu">
+          <button class="user-btn">
+            <div class="user-avatar">A</div>
+            <div class="user-info">
+              <span class="user-name">Admin</span>
+              <span class="user-type">Superuser</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <h4 class="nav-title">Principal</h4>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a class="nav-link" href="admin.html">📊 Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="usuarios.html">👥 Usuarios</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="reportes.html">📦 Reportes</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="facturacion.html">💳 Facturación</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="admincalendario.html">📅 Calendario</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="widget">
+        <div class="widget-header">
+          <h3>Reportes de Usuarios</h3>
+        </div>
+
+        <table class="users-table" id="tablaReportes">
+          <thead>
+            <tr>
+              <th>Usuario</th>
+              <th>Reporte</th>
+              <th>Estado</th>
+              <th>Respuesta</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Reportes dinámicos -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <!-- Modal: Responder Reporte -->
+    <div id="modal-responder" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Responder Reporte</h3>
+          <button class="modal-close" data-close="modal-responder">✖</button>
+        </div>
+        <div class="modal-body">
+          <form id="formResponder">
+            <input type="hidden" id="reporteIndex" />
+            <div class="form-group">
+              <label for="respuesta">Respuesta</label>
+              <textarea
+                id="respuesta"
+                required
+                placeholder="Escribe la respuesta..."
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label for="estado">Estado</label>
+              <select id="estado" required>
+                <option value="En espera">En espera</option>
+                <option value="Atendido">Atendido</option>
+                <option value="En mantenimiento">En mantenimiento</option>
+              </select>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn-primary">Guardar</button>
+              <button
+                type="button"
+                class="btn-secondary"
+                data-close="modal-responder"
+              >
+                Cancelar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+
+    <script>
+      const tabla = document.querySelector("#tablaReportes tbody");
+      const modalResponder = document.getElementById("modal-responder");
+      const toast = document.getElementById("toast");
+
+      let reportes = [
+        {
+          usuario: "José Martínez",
+          reporte: "No tengo agua desde hace 3 días en el sector Banco Obrero",
+          estado: "En espera",
+          respuesta: "",
+        },
+        {
+          usuario: "Luisa Fernández",
+          reporte: "Hay fuga de agua en la calle Bolívar desde hace 1 semana",
+          estado: "En espera",
+          respuesta: "",
+        },
+        {
+          usuario: "Pedro Gómez",
+          reporte: "Presión del agua muy baja en Urbanización Los Pinos",
+          estado: "En espera",
+          respuesta: "",
+        },
+      ];
+
+      // Renderizar tabla
+      function actualizarTabla() {
+        tabla.innerHTML = "";
+        reportes.forEach((r, index) => {
+          const fila = document.createElement("tr");
+          fila.innerHTML = `
+          <td>${r.usuario}</td>
+          <td>${r.reporte}</td>
+          <td>
+  <span class="badge ${
+    r.estado === "Atendido"
+      ? "success"
+      : r.estado === "En mantenimiento"
+      ? "danger"
+      : "warning"
+  }">
+    ${r.estado}
+  </span>
+</td>
+          <td>${r.respuesta || "-"}</td>
+          <td>
+            <button class="btn-secondary btn-sm" onclick="responder(${index})">💬 Responder</button>
+          </td>
+        `;
+          tabla.appendChild(fila);
+        });
+      }
+
+      actualizarTabla();
+
+      // Abrir modal responder
+      window.responder = (index) => {
+        document.getElementById("reporteIndex").value = index;
+        document.getElementById("respuesta").value = reportes[index].respuesta;
+        document.getElementById("estado").value = reportes[index].estado;
+        modalResponder.classList.add("show");
+      };
+
+      // Guardar respuesta
+      document
+        .getElementById("formResponder")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          const index = document.getElementById("reporteIndex").value;
+          reportes[index].respuesta =
+            document.getElementById("respuesta").value;
+          reportes[index].estado = document.getElementById("estado").value;
+          actualizarTabla();
+          modalResponder.classList.remove("show");
+          mostrarToast("✅ Respuesta guardada");
+        });
+
+      // Cerrar modales
+      document.querySelectorAll("[data-close]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .getElementById(btn.getAttribute("data-close"))
+            .classList.remove("show");
+        });
+      });
+
+      window.addEventListener("click", (e) => {
+        if (e.target.classList.contains("modal")) {
+          e.target.classList.remove("show");
+        }
+      });
+
+      // Toast
+      function mostrarToast(mensaje) {
+        toast.textContent = mensaje;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 3000);
+      }
+    </script>
+
+    <style>
+      /* Badge de estado */
+      .badge {
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+        color: white;
+      }
+      .badge.success {
+        background: #10b981;
+      }
+      .badge.warning {
+        background: #f59e0b;
+      }
+    </style>
+  </body>
+</html>

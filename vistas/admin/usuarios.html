@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Usuarios - Admin Hidrogest</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="stylesheet" href="../dashboard.css" />
+    <link rel="stylesheet" href="admin.css" />
+    <!-- CSS adicional de modales -->
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <div class="logo">
+          <img src="../LOGO.png" alt="Logo" />
+          <span class="logo-text">AdminPanel</span>
+        </div>
+      </div>
+      <div class="header-center">
+        <h2>Gestión de Usuarios</h2>
+      </div>
+      <div class="header-right">
+        <div class="user-menu">
+          <button class="user-btn">
+            <div class="user-avatar">A</div>
+            <div class="user-info">
+              <span class="user-name">Admin</span>
+              <span class="user-type">Superuser</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <h4 class="nav-title">Principal</h4>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a class="nav-link" href="admin.html">📊 Dashboard</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="usuarios.html">👥 Usuarios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="reportes.html">📦 Reportes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="facturacion.html">💳 Facturación</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="admincalendario.html">📅 Calendario</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="widget">
+        <div class="widget-header">
+          <h3>Lista de Usuarios</h3>
+          <button id="btnNuevoUsuario" class="btn-primary">
+            ➕ Nuevo Usuario
+          </button>
+        </div>
+
+        <table class="users-table" id="tablaUsuarios">
+          <thead>
+            <tr>
+              <th>Cédula</th>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Teléfono</th>
+              <th>Rol</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Filas dinámicas -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <!-- Modal: Nuevo Usuario -->
+    <div id="modal-nuevo-usuario" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Nuevo Usuario</h3>
+          <button class="modal-close" data-close="modal-nuevo-usuario">
+            ✖
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formNuevoUsuario">
+            <div class="form-group">
+              <label for="cedula">Cédula</label>
+              <input type="text" id="cedula" required />
+            </div>
+            <div class="form-group">
+              <label for="nombre">Nombre Completo</label>
+              <input type="text" id="nombre" required />
+            </div>
+            <div class="form-group">
+              <label for="correo">Correo</label>
+              <input type="email" id="correo" required />
+            </div>
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <input type="text" id="telefono" required />
+            </div>
+            <div class="form-group">
+              <label for="rol">Rol</label>
+              <select id="rol" required>
+                <option value="Administrador">Administrador</option>
+                <option value="Usuario">Usuario</option>
+                <option value="Supervisor">Supervisor</option>
+              </select>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn-primary">Guardar</button>
+              <button
+                type="button"
+                class="btn-secondary"
+                data-close="modal-nuevo-usuario"
+              >
+                Cancelar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Editar Usuario -->
+    <div id="modal-editar-usuario" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Editar Usuario</h3>
+          <button class="modal-close" data-close="modal-editar-usuario">
+            ✖
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formEditarUsuario">
+            <input type="hidden" id="editIndex" />
+            <!-- para identificar el usuario -->
+            <div class="form-group">
+              <label for="editCedula">Cédula</label>
+              <input type="text" id="editCedula" required />
+            </div>
+            <div class="form-group">
+              <label for="editNombre">Nombre Completo</label>
+              <input type="text" id="editNombre" required />
+            </div>
+            <div class="form-group">
+              <label for="editCorreo">Correo</label>
+              <input type="email" id="editCorreo" required />
+            </div>
+            <div class="form-group">
+              <label for="editTelefono">Teléfono</label>
+              <input type="text" id="editTelefono" required />
+            </div>
+            <div class="form-group">
+              <label for="editRol">Rol</label>
+              <select id="editRol" required>
+                <option value="Administrador">Administrador</option>
+                <option value="Usuario">Usuario</option>
+                <option value="Supervisor">Supervisor</option>
+              </select>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn-primary">Guardar Cambios</button>
+              <button
+                type="button"
+                class="btn-secondary"
+                data-close="modal-editar-usuario"
+              >
+                Cancelar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Confirmar Eliminación -->
+    <div id="modal-confirmar" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Confirmar eliminación</h3>
+          <button class="modal-close" data-close="modal-confirmar">✖</button>
+        </div>
+        <div class="modal-body">
+          <p>⚠ ¿Seguro que deseas eliminar este usuario?</p>
+          <div class="form-actions">
+            <button id="confirmarEliminar" class="btn-danger">Eliminar</button>
+            <button class="btn-secondary" data-close="modal-confirmar">
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Ver Propiedades -->
+    <div id="modal-ver-propiedades" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>🏠 Propiedades del Usuario</h3>
+          <button class="modal-close" data-close="modal-ver-propiedades">
+            ✖
+          </button>
+        </div>
+        <div class="modal-body">
+          <table class="users-table propiedades-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Dirección</th>
+                <th>Ciudad</th>
+                <th>Ultima lectura</th>
+                <th>Costo Mensual</th>
+                <th>Consumo promedio</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="tablaPropiedades">
+              <!-- Filas dinámicas cargadas con JS -->
+            </tbody>
+          </table>
+          <div class="form-actions">
+            <button class="btn-secondary" data-close="modal-ver-propiedades">
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Script -->
+
+    <script>
+      const tabla = document.querySelector("#tablaUsuarios tbody");
+      const modalNuevo = document.getElementById("modal-nuevo-usuario");
+      const modalEditar = document.getElementById("modal-editar-usuario");
+      const modalConfirmar = document.getElementById("modal-confirmar");
+      const toast = document.getElementById("toast");
+
+      let usuarioIndex = null; // Para editar/eliminar
+
+      let propertiesData = [
+        {
+          id: "CTR-2023-001",
+          name: "Casa Principal",
+          type: "Residencial",
+          address: "Calle Principal 123, Sector Norte, San Juan de los Morros",
+          contractNumber: "CTR-2023-001",
+          startDate: "15 Enero 2023",
+          lastReading: "1,250 m³ - 10 Dic 2024",
+          averageConsumption: "45 m³/mes",
+          monthlyCost: 42.6,
+          status: "active",
+          serviceStatus: "Excelente",
+          readings: [
+            { date: "10 Dic 2024", consumption: 1250, cost: 42.6 },
+            { date: "10 Nov 2024", consumption: 1205, cost: 38.2 },
+            { date: "10 Oct 2024", consumption: 1160, cost: 42.6 },
+            { date: "10 Sep 2024", consumption: 1115, cost: 35.8 },
+          ],
+        },
+        {
+          id: "CTR-2023-002",
+          name: "Apartamento Centro",
+          type: "Residencial",
+          address: "Av. Bolívar Norte 456, Centro, San Juan de los Morros",
+          contractNumber: "CTR-2023-002",
+          startDate: "20 Marzo 2023",
+          lastReading: "890 m³ - 8 Dic 2024",
+          averageConsumption: "32 m³/mes",
+          monthlyCost: 44.7,
+          status: "active",
+          serviceStatus: "Excelente",
+          readings: [
+            { date: "8 Dic 2024", consumption: 890, cost: 44.7 },
+            { date: "8 Nov 2024", consumption: 858, cost: 38.2 },
+            { date: "8 Oct 2024", consumption: 826, cost: 42.6 },
+            { date: "8 Sep 2024", consumption: 794, cost: 35.8 },
+          ],
+        },
+      ];
+
+      // 🔹 Usuarios precargados
+      let usuarios = [
+        {
+          cedula: "12345678",
+          nombre: "Juan Pérez",
+          correo: "juan@example.com",
+          telefono: "0412-1234567",
+          rol: "Administrador",
+          propiedades: propertiesData,
+        },
+        {
+          cedula: "87654321",
+          nombre: "María Gómez",
+          correo: "maria@example.com",
+          telefono: "0414-7654321",
+          rol: "Usuario",
+          propiedades: [],
+        },
+      ];
+
+      // 🔹 Renderizar tabla al cargar
+      actualizarTabla();
+      // Abrir modal de nuevo usuario
+      document
+        .getElementById("btnNuevoUsuario")
+        .addEventListener("click", () => {
+          modalNuevo.classList.add("show");
+        });
+
+      // Guardar nuevo usuario
+      document
+        .getElementById("formNuevoUsuario")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          const nuevoUsuario = {
+            cedula: document.getElementById("cedula").value,
+            nombre: document.getElementById("nombre").value,
+            correo: document.getElementById("correo").value,
+            telefono: document.getElementById("telefono").value,
+            rol: document.getElementById("rol").value,
+            propiedades: [],
+          };
+
+          usuarios.push(nuevoUsuario);
+          actualizarTabla();
+
+          modalNuevo.classList.remove("show");
+          mostrarToast("✅ Usuario agregado correctamente");
+
+          e.target.reset();
+        });
+
+      // Actualizar tabla
+      function actualizarTabla() {
+        tabla.innerHTML = "";
+        usuarios.forEach((u, index) => {
+          const fila = document.createElement("tr");
+          fila.innerHTML = `
+        <td>${u.cedula}</td>
+        <td>${u.nombre}</td>
+        <td>${u.correo}</td>
+        <td>${u.telefono}</td>
+        <td>${u.rol}</td>
+        <td>
+          <button class="btn-info btn-sm" onclick="verPropiedades(${index})">🏠 Propiedades</button>
+          <button class="btn-secondary btn-sm" onclick="editarUsuario(${index})">✏ Editar</button>
+          <button class="btn-danger btn-sm" onclick="eliminarUsuario(${index})">🗑 Eliminar</button>
+        </td>
+      `;
+          tabla.appendChild(fila);
+        });
+      }
+
+      // Editar usuario
+      window.editarUsuario = (index) => {
+        usuarioIndex = index;
+        const u = usuarios[index];
+
+        document.getElementById("editIndex").value = index;
+        document.getElementById("editCedula").value = u.cedula;
+        document.getElementById("editNombre").value = u.nombre;
+        document.getElementById("editCorreo").value = u.correo;
+        document.getElementById("editTelefono").value = u.telefono;
+        document.getElementById("editRol").value = u.rol;
+
+        modalEditar.classList.add("show");
+      };
+
+      document
+        .getElementById("formEditarUsuario")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          const index = document.getElementById("editIndex").value;
+
+          usuarios[index] = {
+            cedula: document.getElementById("editCedula").value,
+            nombre: document.getElementById("editNombre").value,
+            correo: document.getElementById("editCorreo").value,
+            telefono: document.getElementById("editTelefono").value,
+            rol: document.getElementById("editRol").value,
+          };
+
+          actualizarTabla();
+          modalEditar.classList.remove("show");
+          mostrarToast("✏ Usuario actualizado");
+        });
+
+      // Eliminar usuario
+      window.eliminarUsuario = (index) => {
+        usuarioIndex = index;
+        modalConfirmar.classList.add("show");
+      };
+
+      document
+        .getElementById("confirmarEliminar")
+        .addEventListener("click", () => {
+          if (usuarioIndex !== null) {
+            usuarios.splice(usuarioIndex, 1);
+            actualizarTabla();
+            mostrarToast("🗑 Usuario eliminado");
+            usuarioIndex = null;
+          }
+          modalConfirmar.classList.remove("show");
+        });
+
+      //ver propiedades
+      window.verPropiedades = (index) => {
+        const propiedades = usuarios[index].propiedades || [];
+        const tbody = document.getElementById("tablaPropiedades");
+        tbody.innerHTML = "";
+
+        if (propiedades.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;color:#6c6c70;">⚠ No tiene propiedades registradas</td></tr>`;
+        } else {
+          propiedades.forEach((p) => {
+            const fila = document.createElement("tr");
+            fila.innerHTML = `
+        <td>${p.id}</td>
+        <td>${p.address}</td>
+        <td>${p.type}</td>
+        <td>${p.lastReading}</td>
+        <td>${p.averageConsumption}</td>
+        <td>$${p.monthlyCost.toFixed(2)}</td>
+        <td>
+          <span class="badge ${p.status === "Activo" ? "success" : "warning"}">
+            ${p.status}
+          </span>
+        </td>
+      `;
+            tbody.appendChild(fila);
+          });
+        }
+
+        document.getElementById("modal-ver-propiedades").classList.add("show");
+      };
+      // Cerrar modales (X y botones cancelar)
+      document.querySelectorAll("[data-close]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .getElementById(btn.getAttribute("data-close"))
+            .classList.remove("show");
+        });
+      });
+
+      window.addEventListener("click", (e) => {
+        if (e.target.classList.contains("modal")) {
+          e.target.classList.remove("show");
+        }
+      });
+
+      // Toast
+      function mostrarToast(mensaje) {
+        toast.textContent = mensaje;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 3000);
+      }
+    </script>
+    <script>
+      const modalNuevoUsuario = document.getElementById("modal-nuevo-usuario");
+      let filaAEliminar = null;
+
+      // Abrir modal de nuevo usuario
+      document
+        .getElementById("btnNuevoUsuario")
+        .addEventListener("click", () => {
+          modalNuevoUsuario.classList.add("show");
+        });
+
+      // Guardar nuevo usuario (simulación)
+      document
+        .getElementById("formNuevoUsuario")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          modalNuevoUsuario.classList.remove("show");
+          mostrarToast("✅ Usuario agregado correctamente");
+        });
+
+      // Botones de eliminar
+      document.querySelectorAll(".btn-danger.btn-sm").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          filaAEliminar = btn.closest("tr");
+          modalConfirmar.classList.add("show");
+        });
+      });
+
+      // Confirmar eliminación
+      document
+        .getElementById("confirmarEliminar")
+        .addEventListener("click", () => {
+          if (filaAEliminar) {
+            filaAEliminar.remove();
+            mostrarToast("🗑 Usuario eliminado");
+            filaAEliminar = null;
+          }
+          modalConfirmar.classList.remove("show");
+        });
+
+      // Cerrar modales
+      document.querySelectorAll("[data-close]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const target = btn.getAttribute("data-close");
+          document.getElementById(target).classList.remove("show");
+        });
+      });
+
+      window.addEventListener("click", (e) => {
+        if (e.target.classList.contains("modal")) {
+          e.target.classList.remove("show");
+        }
+      });
+
+      // Función para mostrar notificaciones
+      function mostrarToast(mensaje) {
+        toast.textContent = mensaje;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 3000);
+      }
+    </script>
+  </body>
+</html>

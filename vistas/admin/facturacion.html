@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Facturación</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../favicon/favicon-16x16.png"
+    />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="stylesheet" href="../dashboard.css" />
+    <link rel="stylesheet" href="admin.css" />
+  
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <div class="logo">
+          <img src="../LOGO.png" alt="Logo" />
+          <span class="logo-text">AdminPanel</span>
+        </div>
+      </div>
+      <div class="header-center">
+        <h2>Gestión de Facturación</h2>
+      </div>
+      <div class="header-right">
+        <div class="user-menu">
+          <button class="user-btn">
+            <div class="user-avatar">A</div>
+            <div class="user-info">
+              <span class="user-name">Admin</span>
+              <span class="user-type">Superuser</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <h4 class="nav-title">Principal</h4>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a class="nav-link" href="admin.html">📊 Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="usuarios.html">👥 Usuarios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="reportes.html">📦 Reportes</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="facturacion.html">💳 Facturación</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="admincalendario.html">📅 Calendario</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="widgets-grid">
+        <!-- Tabla de facturas -->
+        <div class="widget">
+          <div class="widget-header flex-between">
+            <h3>Pagos Pendientes</h3>
+            <button class="btn-primary" id="btnNuevaFactura">
+              ➕ Nueva Factura
+            </button>
+          </div>
+         <table class="facturas-table" id="tablaFacturas">
+            <thead>
+              <tr>
+                <th>Usuario</th>
+                <th>Monto</th>
+                <th>Descripción</th>
+                <th>Fecha</th>
+                <th>Estatus</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Facturas dinámicas -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Métodos de pago -->
+        <div class="widget">
+          <div class="widget-header">
+            <h3>Métodos de Pago</h3>
+          </div>
+          <ul id="listaMetodos" class="list">
+            <!-- Se llena con JS -->
+          </ul>
+          <button class="btn-secondary" id="btnAgregarMetodo">
+            ➕ Agregar Método
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal: Nueva Factura -->
+    <div id="modalFactura" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Agregar Factura</h3>
+          <button class="modal-close" data-close="modalFactura">✖</button>
+        </div>
+        <div class="modal-body">
+          <form id="formFactura">
+            <div class="form-group">
+              <label for="usuarioFactura">Usuario</label>
+              <input type="text" id="usuarioFactura" required />
+            </div>
+            <div class="form-group">
+              <label for="montoFactura">Monto</label>
+              <input type="number" id="montoFactura" required />
+            </div>
+            <div class="form-group">
+              <label for="descripcionFactura">Descripción</label>
+              <input type="text" id="descripcionFactura" required />
+            </div>
+            <div class="form-group">
+              <label for="fechaFactura">Fecha</label>
+              <input type="date" id="fechaFactura" required />
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn-primary">Guardar</button>
+              <button
+                type="button"
+                class="btn-secondary"
+                data-close="modalFactura"
+              >
+                Cancelar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Métodos de Pago -->
+    <div id="modalMetodo" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="modalMetodoTitulo">Agregar Método de Pago</h3>
+          <button class="modal-close" data-close="modalMetodo">✖</button>
+        </div>
+        <div class="modal-body">
+          <form id="formMetodo">
+            <input type="hidden" id="metodoIndex" />
+            <div class="form-group">
+              <label for="nombreMetodo">Nombre</label>
+              <input
+                type="text"
+                id="nombreMetodo"
+                placeholder="Ej: Pago Móvil, Zelle..."
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="detalleMetodo">Detalle</label>
+              <input
+                type="text"
+                id="detalleMetodo"
+                placeholder="Datos de pago..."
+                required
+              />
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn-primary">Guardar</button>
+              <button
+                type="button"
+                class="btn-secondary"
+                data-close="modalMetodo"
+              >
+                Cancelar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* ================= FACTURAS ================= */
+      const tablaFacturas = document.querySelector("#tablaFacturas tbody");
+      const modalFactura = document.getElementById("modalFactura");
+
+      // Datos iniciales
+      let facturas = [
+        {
+          usuario: "Carlos López",
+          monto: 15,
+          descripcion: "Factura Agua Julio",
+          fecha: "2025-08-01",
+          estado: "Pendiente",
+        },
+        {
+          usuario: "María Gómez",
+          monto: 20,
+          descripcion: "Factura Agua Julio",
+          fecha: "2025-08-05",
+          estado: "Pendiente",
+        },
+      ];
+
+      // Render facturas
+      function renderFacturas() {
+        tablaFacturas.innerHTML = "";
+        facturas.forEach((f, i) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${f.usuario}</td>
+            <td>$${f.monto}</td>
+            <td>${f.descripcion}</td>
+            <td>${f.fecha}</td>
+            <td>
+              <span class="badge ${
+                f.estado === "Recibido" ? "success" : "warning"
+              }">${f.estado}</span>
+            </td>
+            <td>
+              <button class="btn-sm btn-secondary" onclick="cambiarEstado(${i})">✔ Cambiar Estatus</button>
+            </td>
+          `;
+          tablaFacturas.appendChild(row);
+        });
+      }
+
+      renderFacturas();
+
+      // Cambiar estatus
+      window.cambiarEstado = (index) => {
+        facturas[index].estado =
+          facturas[index].estado === "Pendiente" ? "Recibido" : "Pendiente";
+        renderFacturas();
+      };
+
+      // Abrir modal Nueva Factura con fecha por defecto
+      document.getElementById("btnNuevaFactura").addEventListener("click", () => {
+        const today = new Date().toISOString().split("T")[0];
+        document.getElementById("fechaFactura").value = today;
+        modalFactura.classList.add("show");
+      });
+
+      // Guardar factura
+      document.getElementById("formFactura").addEventListener("submit", (e) => {
+        e.preventDefault();
+        facturas.push({
+          usuario: document.getElementById("usuarioFactura").value,
+          monto: document.getElementById("montoFactura").value,
+          descripcion: document.getElementById("descripcionFactura").value,
+          fecha: document.getElementById("fechaFactura").value,
+          estado: "Pendiente",
+        });
+        renderFacturas();
+        modalFactura.classList.remove("show");
+      });
+
+      /* ================= MÉTODOS DE PAGO ================= */
+      const listaMetodos = document.getElementById("listaMetodos");
+      const modalMetodo = document.getElementById("modalMetodo");
+      const formMetodo = document.getElementById("formMetodo");
+      const modalMetodoTitulo = document.getElementById("modalMetodoTitulo");
+
+      let metodosPago = [
+        {
+          nombre: "Pago Móvil",
+          detalle: "Banco de Venezuela - 0412-1234567 - CI: 12345678",
+        },
+        { nombre: "Zelle", detalle: "pagos@hidrogest.com" },
+        {
+          nombre: "Transferencia Bancaria",
+          detalle: "Banco Provincial - 0108-9876-5432-1098",
+        },
+      ];
+
+      // Renderizar métodos
+      function renderMetodos() {
+        listaMetodos.innerHTML = "";
+        metodosPago.forEach((m, i) => {
+          const li = document.createElement("li");
+          li.innerHTML = `
+            <strong>${m.nombre}:</strong> ${m.detalle}
+            <button class="btn-sm btn-secondary" onclick="editarMetodo(${i})">✏ Editar</button>
+          `;
+          listaMetodos.appendChild(li);
+        });
+      }
+
+      renderMetodos();
+
+      // Abrir modal para nuevo método
+      document
+        .getElementById("btnAgregarMetodo")
+        .addEventListener("click", () => {
+          modalMetodo.classList.add("show");
+          modalMetodoTitulo.textContent = "Agregar Método de Pago";
+          document.getElementById("metodoIndex").value = "";
+          formMetodo.reset();
+        });
+
+      // Guardar método (nuevo o editado)
+      formMetodo.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const index = document.getElementById("metodoIndex").value;
+        const nombre = document.getElementById("nombreMetodo").value;
+        const detalle = document.getElementById("detalleMetodo").value;
+
+        if (index === "") {
+          metodosPago.push({ nombre, detalle });
+        } else {
+          metodosPago[index] = { nombre, detalle };
+        }
+
+        renderMetodos();
+        modalMetodo.classList.remove("show");
+      });
+
+      // Función editar método
+      window.editarMetodo = (i) => {
+        modalMetodo.classList.add("show");
+        modalMetodoTitulo.textContent = "Editar Método de Pago";
+        document.getElementById("metodoIndex").value = i;
+        document.getElementById("nombreMetodo").value = metodosPago[i].nombre;
+        document.getElementById("detalleMetodo").value = metodosPago[i].detalle;
+      };
+
+      /* ================= CERRAR MODALES ================= */
+      document.querySelectorAll("[data-close]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .getElementById(btn.getAttribute("data-close"))
+            .classList.remove("show");
+        });
+      });
+
+      window.addEventListener("click", (e) => {
+        if (e.target.classList.contains("modal")) {
+          e.target.classList.remove("show");
+        }
+      });
+    </script>
+
+    <style>
+      .badge.success {
+        background: #10b981;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 12px;
+      }
+      .badge.warning {
+        background: #f59e0b;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 12px;
+      }
+    
+    </style>
+  </body>
+</html>

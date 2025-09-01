@@ -1,0 +1,33 @@
+{
+  "name": "hidrogest",
+  "version": "0.0.0",
+  "description": "Backend de Hidrogest",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miguelxponce20/Hidrogest.git"
+  },
+  "author": "Developen Team Of Hidrogest",
+  "type": "commonjs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/miguelxponce20/Hidrogest/issues"
+  },
+  "homepage": "https://github.com/miguelxponce20/Hidrogest#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.1",
+    "multer": "^2.0.2",
+    "nodemailer": "^7.0.5",
+    "nodemon": "^3.1.10",
+    "sqlite3": "^5.1.7"
+  }
+}

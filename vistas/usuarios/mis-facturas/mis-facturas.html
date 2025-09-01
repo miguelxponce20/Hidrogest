@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mis Facturas - HIDROGEST</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../../favicon/favicon-16x16.png"
+    />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../colores.css" />
+    <link rel="stylesheet" href="../usuarios.css" />
+    <link rel="stylesheet" href="mis-facturas.css" />
+  </head>
+  <body>
+    <!-- Header Superior -->
+    <header class="header">
+      <div class="header-left">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M3 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="logo">
+          <img src="../../LOGO.png" alt="HIDROGEST Logo" />
+          <span class="logo-text">HIDROGEST</span>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <div class="search-bar">
+          <input type="text" placeholder="Buscar facturas..." />
+          <button class="search-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="notifications">
+          <button class="notification-btn" id="notificationBtn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M18 8A6 6 0 0 0 6 8C6 15 3 17 3 17H21C21 17 18 15 18 8Z"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M13.73 21A2 2 0 0 1 10.27 21"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span class="notification-badge" id="notificationBadge">3</span>
+          </button>
+        </div>
+
+        <div class="user-menu">
+          <button class="user-btn" id="userBtn">
+            <div class="user-avatar">JD</div>
+            <div class="user-info">
+              <span class="user-name">Juan Doe</span>
+              <span class="user-type">Propietario</span>
+            </div>
+            <svg
+              class="chevron"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path
+                d="M6 9L12 15L18 9"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+
+            <!-- User Dropdown -->
+            <div class="user-dropdown" id="userDropdown">
+              <div class="dropdown-item" data-action="settings">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 20H21"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M16.5 3.5C17.163 2.837 17.948 2.5 18.75 2.5C19.552 2.5 20.337 2.837 21 3.5C21.663 4.163 22 4.948 22 5.75C22 6.552 21.663 7.337 21 8L12 17L7 12L16.5 3.5Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Configuración</span>
+              </div>
+              <div class="dropdown-item" data-action="help">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M9 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H11L13 5H19A2 2 0 0 1 21 7V9"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M16 2V6H20"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M9 15L15 9"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M9 9H9.01"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M15 15H15.01"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Ayuda</span>
+              </div>
+              <div class="dropdown-divider"></div>
+              <div class="dropdown-item logout" data-action="logout">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M9 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H11L13 5H19A2 2 0 0 1 21 7V19A2 2 0 0 1 19 21H9Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M16 2V6H20"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M9 15L15 9"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M9 9H9.01"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M15 15H15.01"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Cerrar Sesión</span>
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <h3 class="nav-title">Principal</h3>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="../dashboard/dashboard.html" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <polyline
+                    points="9,22 9,12 15,12 15,22"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../mi-perfil/mi_perfil.html" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <circle
+                    cx="12"
+                    cy="7"
+                    r="4"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Mi Perfil</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../calendario/calendario.html" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <rect
+                    x="3"
+                    y="4"
+                    width="18"
+                    height="18"
+                    rx="2"
+                    ry="2"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <line
+                    x1="16"
+                    y1="2"
+                    x2="16"
+                    y2="6"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <line
+                    x1="8"
+                    y1="2"
+                    x2="8"
+                    y2="6"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <line
+                    x1="3"
+                    y1="10"
+                    x2="21"
+                    y2="10"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Calendario</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-title">Servicios</h3>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="../incidencias/incidencias.html" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M10.29 3.86L1.82 18A2 2 0 0 0 3.82 20H20.18A2 2 0 0 0 22.18 18L13.71 3.86A2 2 0 0 0 10.29 3.86Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <line
+                    x1="12"
+                    y1="9"
+                    x2="12"
+                    y2="13"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <line
+                    x1="12"
+                    y1="17"
+                    x2="12.01"
+                    y2="17"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Reportar Incidencia</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../mis-reportes/mis-reportes.html" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M14 2H6A2 2 0 0 0 4 4V20A2 2 0 0 0 6 22H18A2 2 0 0 0 20 20V8L14 2Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <polyline
+                    points="14,2 14,8 20,8"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <line
+                    x1="16"
+                    y1="13"
+                    x2="8"
+                    y2="13"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <line
+                    x1="16"
+                    y1="17"
+                    x2="8"
+                    y2="17"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <polyline
+                    points="10,9 9,9 8,9"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Mis Reportes</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section owner-only">
+          <h3 class="nav-title">Propietarios</h3>
+          <ul class="nav-list">
+            <li class="nav-item active">
+              <a href="#" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M14 2H6A2 2 0 0 0 4 4V20A2 2 0 0 0 6 22H18A2 2 0 0 0 20 20V8L14 2Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <polyline
+                    points="14,2 14,8 20,8"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <line
+                    x1="16"
+                    y1="13"
+                    x2="8"
+                    y2="13"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <line
+                    x1="16"
+                    y1="17"
+                    x2="8"
+                    y2="17"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <polyline
+                    points="10,9 9,9 8,9"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Mis Facturas</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../realizar-pago/realizar-pago.html" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 1V23"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M17 5H9.5A3.5 3.5 0 0 0 6 8.5V11A3.5 3.5 0 0 0 9.5 14.5H17"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Realizar Pago</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../mis-propiedades/mis-propiedades.html" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <polyline
+                    points="9,22 9,12 15,12 15,22"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Mis Propiedades</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Overlay para móviles -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+      <div class="page-header">
+        <h1>Mis Facturas</h1>
+        <p>Gestiona tus facturas de servicios de agua</p>
+      </div>
+
+      <!-- Filtros -->
+      <div class="bills-filters">
+        <button class="filter-btn active" data-filter="all">Todas</button>
+        <button class="filter-btn" data-filter="pending">Pendientes</button>
+        <button class="filter-btn" data-filter="paid">Pagadas</button>
+        <button class="filter-btn" data-filter="overdue">Vencidas</button>
+      </div>
+
+      <!-- Resumen de Facturación -->
+      <div class="bills-summary">
+        <div class="summary-card">
+          <div class="summary-icon pending">📋</div>
+          <div class="summary-info">
+            <span class="summary-label">Pendientes</span>
+            <span class="summary-value">$45.50</span>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon overdue">⚠️</div>
+          <div class="summary-info">
+            <span class="summary-label">Vencidas</span>
+            <span class="summary-value">$0.00</span>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon paid">✅</div>
+          <div class="summary-info">
+            <span class="summary-label">Pagadas</span>
+            <span class="summary-value">$156.80</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lista de Facturas -->
+      <div class="bills-list">
+        <!-- Factura Pendiente -->
+        <div class="bill-item pending" data-status="pending">
+          <div class="bill-header">
+            <div class="bill-number">#FAC-2024-001</div>
+            <div class="bill-status pending">Pendiente</div>
+          </div>
+          <div class="bill-details">
+            <div class="bill-info">
+              <h4>Factura de Diciembre 2024</h4>
+              <p class="bill-period">Período: 01/12/2024 - 31/12/2024</p>
+              <p class="bill-property">
+                Propiedad: Casa Principal - Sector Norte
+              </p>
+            </div>
+            <div class="bill-amount">
+              <span class="amount">$45.50</span>
+              <span class="due-date">Vence: 15 Dic 2024</span>
+            </div>
+          </div>
+          <div class="bill-actions">
+            <button
+              class="btn-secondary"
+              onclick="downloadBill('FAC-2024-001')"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M21 15V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V15"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <polyline
+                  points="7,10 12,15 17,10"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <line
+                  x1="12"
+                  y1="15"
+                  x2="12"
+                  y2="3"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Descargar
+            </button>
+            <button
+              class="btn-primary"
+              onclick="payBill('FAC-2024-001', 45.50)"
+            >
+              Pagar Ahora
+            </button>
+            <button
+              class="btn-outline"
+              onclick="viewBillDetails('FAC-2024-001')"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Ver Detalles
+            </button>
+            <button
+              class="btn-outline"
+              onclick="printBill('FAC-2024-001')"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M6 9V2H18V9"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M6 18H4C3.46957 18 2.96086 17.4142 2.58579 17.4142C2.21071 17.4142 2 16.5304 2 16V11C2 10.4696 2.21071 9.58579 2.58579 9.58579C2.96086 9.58579 3.46957 9 4 9H20C20.5304 9 21.0391 9.58579 21.4142 9.58579C21.7893 9.58579 22 10.4696 22 11V16C22 16.5304 21.7893 17.4142 21.4142 17.4142C21.0391 17.4142 20.5304 18 20 18H18"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M18 14H6V22H18V14Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Imprimir
+            </button>
+          </div>
+        </div>
+
+        <!-- Factura Pagada -->
+        <div class="bill-item paid" data-status="paid">
+          <div class="bill-header">
+            <div class="bill-number">#FAC-2024-002</div>
+            <div class="bill-status paid">Pagada</div>
+          </div>
+          <div class="bill-details">
+            <div class="bill-info">
+              <h4>Factura de Noviembre 2024</h4>
+              <p class="bill-period">Período: 01/11/2024 - 30/11/2024</p>
+              <p class="bill-property">
+                Propiedad: Casa Principal - Sector Norte
+              </p>
+            </div>
+            <div class="bill-amount">
+              <span class="amount">$38.20</span>
+              <span class="paid-date">Pagada: 10 Nov 2024</span>
+            </div>
+          </div>
+          <div class="bill-actions">
+            <button
+              class="btn-secondary"
+              onclick="downloadBill('FAC-2024-002')"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M21 15V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V15"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <polyline
+                  points="7,10 12,15 17,10"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <line
+                  x1="12"
+                  y1="15"
+                  x2="12"
+                  y2="3"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Descargar
+            </button>
+            <button
+              class="btn-outline"
+              onclick="viewBillDetails('FAC-2024-002')"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Ver Detalles
+            </button>
+            <button
+              class="btn-outline"
+              onclick="printBill('FAC-2024-002')"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M6 9V2H18V9"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M6 18H4C3.46957 18 2.96086 17.4142 2.58579 17.4142C2.21071 17.4142 2 16.5304 2 16V11C2 10.4696 2.21071 9.58579 2.58579 9.58579C2.96086 9.58579 3.46957 9 4 9H20C20.5304 9 21.0391 9.58579 21.4142 9.58579C21.7893 9.58579 22 10.4696 22 11V16C22 16.5304 21.7893 17.4142 21.4142 17.4142C21.0391 17.4142 20.5304 18 20 18H18"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M18 14H6V22H18V14Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Imprimir
+            </button>
+            <button class="btn-success" disabled>Pagada</button>
+          </div>
+        </div>
+
+        <!-- Más facturas pagadas -->
+        <div class="bill-item paid" data-status="paid">
+          <div class="bill-header">
+            <div class="bill-number">#FAC-2024-003</div>
+            <div class="bill-status paid">Pagada</div>
+          </div>
+          <div class="bill-details">
+            <div class="bill-info">
+              <h4>Factura de Octubre 2024</h4>
+              <p class="bill-period">Período: 01/10/2024 - 31/10/2024</p>
+              <p class="bill-property">Propiedad: Apartamento - Centro</p>
+            </div>
+            <div class="bill-amount">
+              <span class="amount">$42.60</span>
+              <span class="paid-date">Pagada: 12 Oct 2024</span>
+            </div>
+          </div>
+          <div class="bill-actions">
+            <button
+              class="btn-secondary"
+              onclick="downloadBill('FAC-2024-003')"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M21 15V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V15"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <polyline
+                  points="7,10 12,15 17,10"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <line
+                  x1="12"
+                  y1="15"
+                  x2="12"
+                  y2="3"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Descargar
+            </button>
+            <button
+              class="btn-outline"
+              onclick="viewBillDetails('FAC-2024-003')"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Ver Detalles
+            </button>
+            <button
+              class="btn-outline"
+              onclick="printBill('FAC-2024-003')"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M6 9V2H18V9"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M6 18H4C3.46957 18 2.96086 17.4142 2.58579 17.4142C2.21071 17.4142 2 16.5304 2 16V11C2 10.4696 2.21071 9.58579 2.58579 9.58579C2.96086 9.58579 3.46957 9 4 9H20C20.5304 9 21.0391 9.58579 21.4142 9.58579C21.7893 9.58579 22 10.4696 22 11V16C22 16.5304 21.7893 17.4142 21.4142 17.4142C21.0391 17.4142 20.5304 18 20 18H18"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M18 14H6V22H18V14Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Imprimir
+            </button>
+            <button class="btn-success" disabled>Pagada</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="../common.js"></script>
+    <script src="../dashboard/dashboard.js"></script>
+    <script src="./mis-facturas.js"></script>
+  </body>
+</html>
