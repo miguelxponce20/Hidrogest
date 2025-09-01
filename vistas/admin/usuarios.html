@@ -8,11 +8,11 @@
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="/favicon/favicon-16x16.png"
+      href="../favicon/favicon-16x16.png"
     />
     <meta name="msapplication-TileColor" content="#ffffff" />
     <meta name="theme-color" content="#ffffff" />
-    <link rel="stylesheet" href="../dashboard.css" />
+    <link rel="stylesheet" href="../colores.css" />
     <link rel="stylesheet" href="admin.css" />
     <!-- CSS adicional de modales -->
   </head>
@@ -20,6 +20,13 @@
     <!-- Header -->
     <header class="header">
       <div class="header-left">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M3 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
         <div class="logo">
           <img src="../LOGO.png" alt="Logo" />
           <span class="logo-text">AdminPanel</span>
@@ -42,7 +49,7 @@
     </header>
 
     <!-- Sidebar -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
       <nav class="sidebar-nav">
         <div class="nav-section">
           <h4 class="nav-title">Principal</h4>
@@ -66,6 +73,9 @@
         </div>
       </nav>
     </aside>
+
+    <!-- Overlay para móviles -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <main class="main-content">
       <div class="widget">
@@ -96,6 +106,7 @@
 
     <!-- Modal: Nuevo Usuario -->
     <div id="modal-nuevo-usuario" class="modal">
+      <div class="modal-overlay"></div>
       <div class="modal-content">
         <div class="modal-header">
           <h3>Nuevo Usuario</h3>
@@ -146,6 +157,7 @@
 
     <!-- Modal: Editar Usuario -->
     <div id="modal-editar-usuario" class="modal">
+      <div class="modal-overlay"></div>
       <div class="modal-content">
         <div class="modal-header">
           <h3>Editar Usuario</h3>
@@ -198,6 +210,7 @@
 
     <!-- Modal: Confirmar Eliminación -->
     <div id="modal-confirmar" class="modal">
+      <div class="modal-overlay"></div>
       <div class="modal-content">
         <div class="modal-header">
           <h3>Confirmar eliminación</h3>
@@ -217,6 +230,7 @@
 
     <!-- Modal: Ver Propiedades -->
     <div id="modal-ver-propiedades" class="modal">
+      <div class="modal-overlay"></div>
       <div class="modal-content">
         <div class="modal-header">
           <h3>🏠 Propiedades del Usuario</h3>
@@ -543,6 +557,53 @@
         toast.classList.add("show");
         setTimeout(() => toast.classList.remove("show"), 3000);
       }
+
+      // Funcionalidad del menú móvil
+      initMobileMenu();
+
+      function initMobileMenu() {
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        if (mobileMenuBtn && sidebar && sidebarOverlay) {
+          // Abrir menú móvil
+          mobileMenuBtn.addEventListener('click', function() {
+            sidebar.classList.add('active');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          });
+
+          // Cerrar menú móvil al hacer clic en el overlay
+          sidebarOverlay.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+          });
+
+          // Cerrar menú móvil al hacer clic en un enlace
+          const navLinks = sidebar.querySelectorAll('.nav-link');
+          navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+              sidebar.classList.remove('active');
+              sidebarOverlay.classList.remove('active');
+              document.body.style.overflow = '';
+            });
+          });
+
+          // Cerrar menú móvil con tecla Escape
+          document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+              sidebar.classList.remove('active');
+              sidebarOverlay.classList.remove('active');
+              document.body.style.overflow = '';
+            }
+          });
+        }
+      }
     </script>
+    <script src="../usuarios/common.js"></script>
+    <script src="../usuarios/dashboard/dashboard.js"></script>
+    <script src="./usuarios.js"></script>
   </body>
 </html>

@@ -1,0 +1,30 @@
+/* ============================================
+   GLOBAL.CSS - Componentes Específicos Únicos
+   ============================================
+
+   ⚠️ IMPORTANTE: La mayoría de componentes están en colores.css
+   Este archivo está LIMPIO de duplicaciones.
+
+   Si necesitas componentes específicos que NO estén en colores.css,
+   añádelos aquí.
+
+   Jerarquía de CSS:
+   1. colores.css    → Variables y sistema de colores
+   2. global.css     → Componentes específicos únicos
+   3. usuarios.css   → Estilos de pantallas de usuarios
+   4. [pantalla].css → Estilos específicos de cada pantalla
+*/
+
+/* Importar variables del sistema de colores */
+@import url('colores.css');
+
+/* ============================================
+   COMPONENTES ÚNICOS - Solo si no existen en colores.css
+   ============================================
+
+   Agrega aquí solo componentes que sean realmente únicos
+   y no estén definidos en colores.css
+*/
+
+/* ===== COMPONENTES ÚNICOS VAN AQUÍ ===== */
+/* Actualmente vacío - todos los componentes están en colores.css */

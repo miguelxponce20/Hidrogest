@@ -235,7 +235,8 @@ function viewReport(reportId) {
         </div>
     `;
 
-    modal.style.display = 'block';
+    modal.style.display = 'flex';
+    setTimeout(() => modal.classList.add('show'), 10);
 }
 
 // Obtener datos del reporte (simulado)
@@ -313,9 +314,13 @@ function printReport(reportId) {
 
 // Cerrar modal
 document.getElementById('reportModalClose').addEventListener('click', function() {
-    document.getElementById('reportModal').style.display = 'none';
+    const modal = document.getElementById('reportModal');
+    modal.classList.remove('show');
+    setTimeout(() => modal.style.display = 'none', 300);
 });
 
 document.getElementById('reportModalOverlay').addEventListener('click', function() {
-    document.getElementById('reportModal').style.display = 'none';
+    const modal = document.getElementById('reportModal');
+    modal.classList.remove('show');
+    setTimeout(() => modal.style.display = 'none', 300);
 });

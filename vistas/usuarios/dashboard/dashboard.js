@@ -14,8 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Initialize dashboard components
 function initDashboard() {
     // Add owner class to body if user is owner
-    const userTypeEl = document.querySelector('.user-type');
-    const userType = userTypeEl ? userTypeEl.textContent : '';
+    const userType = document.querySelector('.user-type').textContent;
     if (userType === 'Propietario') {
         document.body.classList.add('owner');
     }
@@ -31,12 +30,57 @@ function initDashboard() {
     
     // Initialize calendar
     initCalendar();
-
+    
+    // Initialize mobile menu
+    initMobileMenu();
+    
     // Initialize bills (filters/actions inside bills modal)
     initBills();
 
     // Handle deep linking to open modals via URL params
     handleDeepLinkModals();
+}
+
+// Inicialización del menú móvil
+function initMobileMenu() {
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    
+    if (mobileMenuBtn && sidebar && sidebarOverlay) {
+        // Abrir menú móvil
+        mobileMenuBtn.addEventListener('click', function() {
+            sidebar.classList.add('active');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        // Cerrar menú móvil al hacer clic en el overlay
+        sidebarOverlay.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        // Cerrar menú móvil al hacer clic en un enlace
+        const navLinks = sidebar.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+        
+        // Cerrar menú móvil con tecla Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
 }
 
 // Setup event listeners
@@ -336,7 +380,7 @@ function logout() {
         localStorage.removeItem('userToken');
         
         // Redirect to login page
-        window.location.href = 'login/login.html';
+        window.location.href = '../../login/login.html';
     }
 }
 
@@ -347,6 +391,10 @@ style.textContent = `
         0% { transform: scale(1); }
         50% { transform: scale(1.2); }
         100% { transform: scale(1); }
+    }
+    
+    .notification-item {
+        transition: all 0.3s ease;
     }
     
     .status-card {
@@ -362,21 +410,6 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
-
-// Disable animations when filtering notifications
-const filterNoAnimStyle = document.createElement('style');
-filterNoAnimStyle.textContent = `
-    .notifications-list .notification-item,
-    .notifications-list-full .notification-item {
-        transition: none !important;
-    }
-    /* CSS-only filtering to prevent flicker */
-    #notificationsModal .notifications-list-full[data-filter="cortes"] .notification-item:not([data-type="cortes"]) { display: none !important; }
-    #notificationsModal .notifications-list-full[data-filter="mantenimiento"] .notification-item:not([data-type="mantenimiento"]) { display: none !important; }
-    #notificationsModal .notifications-list-full[data-filter="facturacion"] .notification-item:not([data-type="facturacion"]) { display: none !important; }
-    #notificationsModal .notifications-list-full:not([data-filter]) .notification-item { display: flex !important; }
-`;
-document.head.appendChild(filterNoAnimStyle);
 
 // Add real-time updates simulation
 setInterval(() => {
@@ -446,10 +479,6 @@ document.querySelectorAll('.nav-link').forEach(link => {
 // Add loading states for buttons
 document.querySelectorAll('button').forEach(button => {
     button.addEventListener('click', function() {
-        // Skip loading state for filter buttons to avoid flicker
-        if (this.classList.contains('filter-btn')) {
-            return;
-        }
         if (!this.classList.contains('loading')) {
             this.classList.add('loading');
             this.style.pointerEvents = 'none';
@@ -466,12 +495,12 @@ document.querySelectorAll('button').forEach(button => {
 // Add CSS for loading states
 const loadingStyle = document.createElement('style');
 loadingStyle.textContent = `
-    button.loading:not(.filter-btn) {
+    button.loading {
         position: relative;
         color: transparent !important;
     }
     
-    button.loading:not(.filter-btn)::after {
+    button.loading::after {
         content: '';
         position: absolute;
         top: 50%;
@@ -535,29 +564,6 @@ function showSettingsModal() {
 
 function showHelpModal() {
     showModal('helpModal');
-}
-
-// Handle deep link modals (?open=incident|bills|payment|notifications|calendar)
-function handleDeepLinkModals() {
-    const params = new URLSearchParams(window.location.search);
-    const open = params.get('open');
-    switch (open) {
-        case 'incident':
-            showIncidentModal();
-            break;
-        case 'bills':
-            showBillsModal();
-            break;
-        case 'payment':
-            showPaymentModal();
-            break;
-        case 'notifications':
-            showNotificationsModal();
-            break;
-        case 'calendar':
-            showCalendarModal();
-            break;
-    }
 }
 
 // Setup modal close handlers
@@ -675,7 +681,7 @@ function setupNotificationFilters() {
             filterBtns.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
             
-            // Filter notifications (CSS-driven, sin parpadeo)
+            // Filter notifications
             filterNotifications(filter);
         });
     });
@@ -683,13 +689,15 @@ function setupNotificationFilters() {
 
 // Filter notifications
 function filterNotifications(filter) {
-    const container = document.querySelector('#notificationsModal .notifications-list-full');
-    if (!container) return;
-    if (!filter || filter === 'all') {
-        container.removeAttribute('data-filter');
-    } else {
-        container.setAttribute('data-filter', filter);
-    }
+    const notifications = document.querySelectorAll('.notification-item');
+    
+    notifications.forEach(notification => {
+        if (filter === 'all' || notification.dataset.type === filter) {
+            notification.style.display = 'flex';
+        } else {
+            notification.style.display = 'none';
+        }
+    });
 }
 
 // Setup mark as read functionality
@@ -749,7 +757,10 @@ function generateCalendar() {
     let calendarHTML = '';
     
     // Add day headers
-   
+    const dayNames = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+    dayNames.forEach(day => {
+        calendarHTML += `<div class="calendar-day header">${day}</div>`;
+    });
     
     // Add empty days for first week
     for (let i = 0; i < firstDay; i++) {
@@ -1080,6 +1091,18 @@ function initBills() {
 }
 
 // Add bills initialization to main init
-// (Removed duplicate DOMContentLoaded initialization)
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize dashboard
+    initDashboard();
+    
+    // Setup event listeners
+    setupEventListeners();
+    
+    // Load initial data
+    loadDashboardData();
+    
+    // Initialize bills
+    initBills();
+});
 
 // HIDROGEST Dashboard initialized successfully! 🚀 

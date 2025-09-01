@@ -8,7 +8,7 @@
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="/favicon/favicon-16x16.png"
+      href="../../favicon/favicon-16x16.png"
     />
     <meta name="msapplication-TileColor" content="#ffffff" />
     <meta name="theme-color" content="#ffffff" />
@@ -18,7 +18,9 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="dashboard.css" />
+    <link rel="stylesheet" href="../../colores.css" />
+    <link rel="stylesheet" href="../usuarios.css" />
+    <link rel="stylesheet" href="./dashboard.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   </head>
@@ -26,8 +28,15 @@
     <!-- Header Superior -->
     <header class="header">
       <div class="header-left">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M3 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
         <div class="logo">
-          <img src="LOGO.png" alt="HIDROGEST Logo" />
+          <img src="../../LOGO.png" alt="HIDROGEST Logo" />
           <span class="logo-text">HIDROGEST</span>
         </div>
       </div>
@@ -231,7 +240,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="./usuarios/mi-perfil/mi_perfil.html" class="nav-link">
+              <a href="../mi-perfil/mi_perfil.html" class="nav-link">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"
@@ -254,7 +263,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="./usuarios/calendario/calendario.html" class="nav-link">
+              <a href="../calendario/calendario.html" class="nav-link">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <rect
                     x="3"
@@ -310,7 +319,7 @@
           <ul class="nav-list">
             <li class="nav-item">
               <a
-                href="./usuarios/incidencias/incidencias.html"
+                href="../incidencias/incidencias.html"
                 class="nav-link"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -347,7 +356,7 @@
             </li>
             <li class="nav-item">
               <a
-                href="./usuarios/mis-reportes/mis-reportes.html"
+                href="../mis-reportes/mis-reportes.html"
                 class="nav-link"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -403,7 +412,7 @@
           <h3 class="nav-title">Propietarios</h3>
           <ul class="nav-list">
             <li class="nav-item">
-              <a href="./usuarios/mis-facturas/mis-facturas.html" class="nav-link">
+              <a href="../mis-facturas/mis-facturas.html" class="nav-link">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M14 2H6A2 2 0 0 0 4 4V20A2 2 0 0 0 6 22H18A2 2 0 0 0 20 20V8L14 2Z"
@@ -451,7 +460,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="./usuarios//realizar-pago/realizar-pago.html" class="nav-link">
+              <a href="../realizar-pago/realizar-pago.html" class="nav-link">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M12 1V23"
@@ -472,7 +481,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="./usuarios/mis-propiedades/mis-propiedades.html" class="nav-link">
+              <a href="../mis-propiedades/mis-propiedades.html" class="nav-link">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z"
@@ -496,6 +505,9 @@
         </div>
       </nav>
     </aside>
+
+    <!-- Overlay para móviles -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <!-- Contenido Principal -->
     <main class="main-content">
@@ -1377,6 +1389,7 @@
       </div>
     </div>
 
+    <script src="../common.js"></script>
     <script src="dashboard.js"></script>
     <script>
       // Coordenadas de San Juan de los Morros, Guárico, Venezuela

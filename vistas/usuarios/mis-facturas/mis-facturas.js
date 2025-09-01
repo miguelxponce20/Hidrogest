@@ -79,7 +79,7 @@ function downloadBill(billId) {
 // Pagar factura
 function payBill(billId, amount) {
     // Redirigir a la página de pago con los parámetros
-    const paymentUrl = `/vistas/usuarios/realizar-pago/realizar-pago.html?bill=${billId}&amount=${amount}`;
+    const paymentUrl = `../realizar-pago/realizar-pago.html?bill=${billId}&amount=${amount}`;
     window.location.href = paymentUrl;
 }
 

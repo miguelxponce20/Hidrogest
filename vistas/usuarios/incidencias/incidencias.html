@@ -18,7 +18,9 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../../dashboard.css" />
+    <link rel="stylesheet" href="../../colores.css" />
+    <link rel="stylesheet" href="../usuarios.css" />
+    <link rel="stylesheet" href="incidencias.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     
@@ -27,6 +29,13 @@
     <!-- Header Superior -->
     <header class="header">
       <div class="header-left">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M3 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
         <div class="logo">
           <img src="../../LOGO.png" alt="HIDROGEST Logo" />
           <span class="logo-text">HIDROGEST</span>
@@ -195,7 +204,7 @@
           <h3 class="nav-title">Principal</h3>
           <ul class="nav-list">
             <li class="nav-item">
-              <a href="../../dashboard.html" class="nav-link">
+              <a href="../dashboard/dashboard.html" class="nav-link">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z"
@@ -476,6 +485,9 @@
       </nav>
     </aside>
 
+    <!-- Overlay para móviles -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
   <main class="main-content">
       <section class="widget">
         <div class="widget-header">
@@ -587,7 +599,65 @@
         form.reset();
         if (marker) map.removeLayer(marker);
       });
+
+      document.getElementById('incidentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        document.getElementById('successMessage').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('successMessage').style.display = 'none';
+          this.reset();
+        }, 3000);
+      });
+
+      // Inicialización del menú móvil
+      function initMobileMenu() {
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        
+        if (mobileMenuBtn && sidebar && sidebarOverlay) {
+          // Abrir menú móvil
+          mobileMenuBtn.addEventListener('click', function() {
+            sidebar.classList.add('active');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          });
+          
+          // Cerrar menú móvil al hacer clic en el overlay
+          sidebarOverlay.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+          });
+          
+          // Cerrar menú móvil al hacer clic en un enlace
+          const navLinks = sidebar.querySelectorAll('.nav-link');
+          navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+              sidebar.classList.remove('active');
+              sidebarOverlay.classList.remove('active');
+              document.body.style.overflow = '';
+            });
+          });
+          
+          // Cerrar menú móvil con tecla Escape
+          document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+              sidebar.classList.remove('active');
+              sidebarOverlay.classList.remove('active');
+              document.body.style.overflow = '';
+            }
+          });
+        }
+      }
+
+      // Inicializar cuando el DOM esté listo
+      document.addEventListener('DOMContentLoaded', function() {
+        initMobileMenu();
+      });
     </script>
-     <script src="../../dashboard.js"></script>
+         <script src="../common.js"></script>
+    <script src="../dashboard/dashboard.js"></script>
+    <script src="./incidencias.js"></script>
   </body>
 </html>

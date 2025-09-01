@@ -44,10 +44,13 @@ let propertiesData = [
 
 // Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Inicializando Mis Propiedades...');
     updatePropertiesStats();
-    
+
     // Mejorar cards de propiedades
     enhancePropertyCards();
+
+    console.log('✅ Mis Propiedades inicializado correctamente');
 });
 
 // Actualizar estadísticas de propiedades
@@ -63,9 +66,11 @@ function updatePropertiesStats() {
 
 // Ver detalles de la propiedad
 function viewPropertyDetails(propertyId) {
+    console.log('🔍 Mostrando detalles de propiedad:', propertyId);
     const property = propertiesData.find(p => p.id === propertyId);
 
     if (!property) {
+        console.error('❌ Propiedad no encontrada:', propertyId);
         alert('Propiedad no encontrada');
         return;
     }
@@ -163,14 +168,18 @@ function viewPropertyDetails(propertyId) {
         </div>
     `;
 
-    modal.style.display = 'block';
+    modal.style.display = 'flex';
+    // Pequeño delay para asegurar que display: flex esté aplicado antes de la transición
+    setTimeout(() => modal.classList.add('show'), 10);
 }
 
 // Ver historial de consumo
 function viewConsumptionHistory(propertyId) {
+    console.log('📊 Mostrando historial de consumo:', propertyId);
     const property = propertiesData.find(p => p.id === propertyId);
 
     if (!property) {
+        console.error('❌ Propiedad no encontrada:', propertyId);
         alert('Propiedad no encontrada');
         return;
     }
@@ -264,20 +273,24 @@ function viewConsumptionHistory(propertyId) {
         </div>
     `;
 
-    modal.style.display = 'block';
+    modal.style.display = 'flex';
+    // Pequeño delay para asegurar que display: flex esté aplicado antes de la transición
+    setTimeout(() => modal.classList.add('show'), 10);
 }
 
 // Reportar incidencia para una propiedad
 function reportIncident(propertyId) {
+    console.log('🚨 Reportando incidencia para propiedad:', propertyId);
     const property = propertiesData.find(p => p.id === propertyId);
 
     if (!property) {
+        console.error('❌ Propiedad no encontrada:', propertyId);
         alert('Propiedad no encontrada');
         return;
     }
 
     // Redirigir a la página de reportar incidencia con la propiedad preseleccionada
-    const incidentUrl = '/vistas/reportar-incidencia.html?property=' + encodeURIComponent(property.name);
+    const incidentUrl = '../incidencias/incidencias.html?property=' + encodeURIComponent(property.name);
     window.location.href = incidentUrl;
 }
 
@@ -307,11 +320,15 @@ function exportConsumptionData(propertyId) {
 
 // Cerrar modal
 document.getElementById('propertyModalClose').addEventListener('click', function() {
-    document.getElementById('propertyModal').style.display = 'none';
+    const modal = document.getElementById('propertyModal');
+    modal.classList.remove('show');
+    setTimeout(() => modal.style.display = 'none', 300);
 });
 
 document.getElementById('propertyModalOverlay').addEventListener('click', function() {
-    document.getElementById('propertyModal').style.display = 'none';
+    const modal = document.getElementById('propertyModal');
+    modal.classList.remove('show');
+    setTimeout(() => modal.style.display = 'none', 300);
 });
 
 // Funciones adicionales para mejorar la funcionalidad

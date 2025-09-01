@@ -12,13 +12,20 @@
     />
     <meta name="msapplication-TileColor" content="#ffffff" />
     <meta name="theme-color" content="#ffffff" />
-    <link rel="stylesheet" href="../dashboard.css" />
+    <link rel="stylesheet" href="../colores.css" />
     <link rel="stylesheet" href="admin.css" />
   </head>
   <body>
     <!-- Header -->
     <header class="header">
       <div class="header-left">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M3 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
         <div class="logo">
           <img src="../LOGO.png" alt="Logo" />
           <span class="logo-text">AdminPanel</span>
@@ -41,7 +48,7 @@
     </header>
 
     <!-- Sidebar -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
       <nav class="sidebar-nav">
         <div class="nav-section">
           <h4 class="nav-title">Principal</h4>
@@ -56,6 +63,9 @@
       </nav>
     </aside>
 
+    <!-- Overlay para móviles -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     <!-- Main Content -->
     <main class="main-content">
       <div class="calendar-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
@@ -65,7 +75,7 @@
         <button id="btnAddEvent" class="btn-primary btn-sm">➕ Nueva Incidencia</button>
       </div>
 
-      <div id="calendarGrid" style="display:grid; grid-template-columns:repeat(7,1fr); gap:6px;"></div>
+             <div id="calendarGrid" style="display:grid; grid-template-columns:repeat(7,1fr); gap:6px; margin-top: 20px;"></div>
     </main>
 
     <!-- Modal: Eventos del Día -->
@@ -82,6 +92,7 @@
 
     <!-- Modal: Nueva Incidencia -->
     <div id="modal-evento" class="modal">
+      <div class="modal-overlay"></div>
       <div class="modal-content">
         <div class="modal-header">
           <h3>Agregar Incidencia</h3>
@@ -156,10 +167,13 @@
           el.classList.add("calendar-day");
           el.textContent = d;
 
-          if (events[dateStr]) {
-            events[dateStr].forEach((e) => el.classList.add(e.type));
-            el.onclick = () => showDayEvents(dateStr);
-          }
+                     if (events[dateStr]) {
+             events[dateStr].forEach((e) => el.classList.add(e.type));
+             el.onclick = () => showDayEvents(dateStr);
+           }
+
+           // Hacer que todos los días sean clickeables para mostrar eventos
+           el.onclick = () => showDayEvents(dateStr);
 
           calendarGrid.appendChild(el);
         }
@@ -205,7 +219,264 @@
         renderCalendar();
       });
 
-      renderCalendar();
-    </script>
+             renderCalendar();
+
+       // Función para mostrar eventos del día
+       function showDayEvents(dateStr) {
+         const dayEvents = events[dateStr] || [];
+         const dayModal = document.getElementById('dayModal');
+         const dayModalTitle = document.getElementById('dayModalTitle');
+         const dayModalBody = document.getElementById('dayModalBody');
+         
+         const date = new Date(dateStr);
+         const formattedDate = date.toLocaleDateString('es-ES', {
+           weekday: 'long',
+           year: 'numeric',
+           month: 'long',
+           day: 'numeric'
+         });
+         
+         dayModalTitle.textContent = `Eventos del ${formattedDate}`;
+         
+         if (dayEvents.length === 0) {
+           dayModalBody.innerHTML = '<p>No hay eventos programados para este día.</p>';
+         } else {
+           let eventsHTML = '<ul style="list-style: none; padding: 0;">';
+           dayEvents.forEach(event => {
+             const icon = event.type === 'maintenance' ? '🔧' : 
+                         event.type === 'cut' ? '⛔' : '👀';
+             eventsHTML += `<li style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 8px;">
+               <strong>${icon} ${event.title}</strong>
+               <br><small>Tipo: ${event.type}</small>
+             </li>`;
+           });
+           eventsHTML += '</ul>';
+           dayModalBody.innerHTML = eventsHTML;
+         }
+         
+         dayModal.classList.add('show');
+       }
+
+       // Cerrar modal de eventos del día
+       document.getElementById('dayModalClose').addEventListener('click', () => {
+         document.getElementById('dayModal').classList.remove('show');
+       });
+
+       // Cerrar modal al hacer clic en el overlay
+       document.querySelector('.modal-overlay').addEventListener('click', () => {
+         document.getElementById('dayModal').classList.remove('show');
+       });
+
+       // Funcionalidad del menú móvil
+      initMobileMenu();
+
+      function initMobileMenu() {
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        if (mobileMenuBtn && sidebar && sidebarOverlay) {
+          // Abrir menú móvil
+          mobileMenuBtn.addEventListener('click', function() {
+            sidebar.classList.add('active');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          });
+
+          // Cerrar menú móvil al hacer clic en el overlay
+          sidebarOverlay.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+          });
+
+          // Cerrar menú móvil al hacer clic en un enlace
+          const navLinks = sidebar.querySelectorAll('.nav-link');
+          navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+              sidebar.classList.remove('active');
+              sidebarOverlay.classList.remove('active');
+              document.body.style.overflow = '';
+            });
+          });
+
+          // Cerrar menú móvil con tecla Escape
+          document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+              sidebar.classList.remove('active');
+              sidebarOverlay.classList.remove('active');
+              document.body.style.overflow = '';
+            }
+          });
+        }
+             }
+     </script>
+
+     <style>
+       /* Estilos del calendario */
+       #calendarGrid {
+         position: relative;
+         z-index: 1;
+       }
+       
+       .calendar-day {
+         padding: 15px 10px;
+         text-align: center;
+         border: 1px solid #e5e7eb;
+         border-radius: 8px;
+         cursor: pointer;
+         transition: all 0.2s ease;
+         background: white;
+         min-height: 60px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         font-weight: 500;
+         position: relative;
+         z-index: 1;
+       }
+
+       .calendar-day:hover {
+         background: #f3f4f6;
+         border-color: #d1d5db;
+         transform: translateY(-2px);
+         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+       }
+
+       .calendar-day.empty {
+         background: #f9fafb;
+         border-color: #e5e7eb;
+         cursor: default;
+       }
+
+       .calendar-day.empty:hover {
+         background: #f9fafb;
+         transform: none;
+         box-shadow: none;
+       }
+
+       /* Estilos para días con eventos */
+       .calendar-day.maintenance {
+         background: #fef3c7;
+         border-color: #f59e0b;
+         color: #92400e;
+       }
+
+       .calendar-day.cut {
+         background: #fee2e2;
+         border-color: #ef4444;
+         color: #991b1b;
+       }
+
+       .calendar-day.supervision {
+         background: #dbeafe;
+         border-color: #3b82f6;
+         color: #1e40af;
+       }
+
+       /* Estilos para el header del calendario */
+       .calendar-header {
+         background: white;
+         padding: 20px;
+         border-radius: 12px;
+         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+         margin-bottom: 20px;
+       }
+
+       .calendar-header h2 {
+         margin: 0;
+         color: #374151;
+         font-size: 1.5rem;
+       }
+
+       /* Estilos para los botones del calendario */
+       .btn-sm {
+         padding: 8px 16px;
+         font-size: 0.875rem;
+         border-radius: 6px;
+         border: none;
+         cursor: pointer;
+         transition: all 0.2s ease;
+       }
+
+       .btn-secondary.btn-sm {
+         background: #6b7280;
+         color: white;
+       }
+
+       .btn-secondary.btn-sm:hover {
+         background: #4b5563;
+       }
+
+       .btn-primary.btn-sm {
+         background: #3b82f6;
+         color: white;
+       }
+
+       .btn-primary.btn-sm:hover {
+         background: #2563eb;
+       }
+
+       /* Asegurar que el header tenga prioridad sobre el calendario */
+       .header {
+         position: fixed;
+         z-index: 1000;
+       }
+
+       .mobile-menu-btn {
+         position: relative;
+         z-index: 1001;
+       }
+
+       /* Asegurar que el main-content no interfiera */
+       .main-content {
+         position: relative;
+         z-index: 1;
+         margin-top: 70px;
+       }
+
+       /* Asegurar que el calendario esté por debajo del header */
+       .calendar-header {
+         position: relative;
+         z-index: 1;
+       }
+
+       /* Asegurar que el grid del calendario no interfiera con el header */
+       #calendarGrid {
+         position: relative;
+         z-index: 1;
+         margin-top: 20px;
+       }
+
+       /* Asegurar que los días del calendario no se superpongan */
+       .calendar-day {
+         position: relative;
+         z-index: 1;
+       }
+
+       /* Asegurar que el header tenga la máxima prioridad */
+       .header,
+       .header * {
+         position: relative;
+         z-index: 1000 !important;
+       }
+
+       .mobile-menu-btn {
+         z-index: 1001 !important;
+       }
+
+       /* Asegurar que el body tenga el z-index correcto */
+       body {
+         position: relative;
+       }
+
+       /* Asegurar que el contenido principal esté por debajo del header */
+       .main-content {
+         position: relative;
+         z-index: 1;
+       }
+         </style>
+    <script src="../usuarios/common.js"></script>
+    <script src="../usuarios/dashboard/dashboard.js"></script>
   </body>
 </html>

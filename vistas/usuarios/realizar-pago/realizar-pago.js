@@ -361,13 +361,17 @@ function showPaymentConfirmation() {
     document.getElementById('confirmAmount').textContent = `$${currentBillData.amount.toFixed(2)}`;
     document.getElementById('confirmMethod').textContent = methodNames[selectedPaymentMethod] || selectedPaymentMethod;
 
-    document.getElementById('paymentConfirmationModal').style.display = 'block';
+    const modal = document.getElementById('paymentConfirmationModal');
+    modal.style.display = 'flex';
+    setTimeout(() => modal.classList.add('show'), 10);
 }
 
 // Procesar pago
 function processPayment() {
     // Cerrar modal de confirmación
-    document.getElementById('paymentConfirmationModal').style.display = 'none';
+    const modal = document.getElementById('paymentConfirmationModal');
+    modal.classList.remove('show');
+    setTimeout(() => modal.style.display = 'none', 300);
 
     // Simular procesamiento del pago
     showProcessingMessage();
@@ -399,7 +403,9 @@ function showPaymentSuccess() {
         minute: '2-digit'
     });
 
-    document.getElementById('paymentSuccessModal').style.display = 'block';
+    const successModal = document.getElementById('paymentSuccessModal');
+    successModal.style.display = 'flex';
+    setTimeout(() => successModal.classList.add('show'), 10);
 }
 
 // Descargar recibo
@@ -410,31 +416,43 @@ function downloadReceipt() {
 
 // Ir a mis facturas
 function goToBills() {
-    window.location.href = '/vistas/usuarios/mis-facturas/mis-facturas.html';
+    window.location.href = '../mis-facturas/mis-facturas.html';
 }
 
 // Cancelar pago
 function cancelPayment() {
     if (confirm('¿Estás seguro de que quieres cancelar el pago?')) {
-        window.location.href = '/vistas/usuarios/mis-facturas/mis-facturas.html';
+        window.location.href = '../mis-facturas/mis-facturas.html';
     }
 }
 
 // Cerrar modales
 document.getElementById('confirmationModalClose').addEventListener('click', function() {
-    document.getElementById('paymentConfirmationModal').style.display = 'none';
+    const modal = document.getElementById('paymentConfirmationModal');
+    modal.classList.remove('show');
+    setTimeout(() => modal.style.display = 'none', 300);
 });
 
 document.getElementById('confirmationModalOverlay').addEventListener('click', function() {
-    document.getElementById('paymentConfirmationModal').style.display = 'none';
+    const modal = document.getElementById('paymentConfirmationModal');
+    modal.classList.remove('show');
+    setTimeout(() => modal.style.display = 'none', 300);
 });
 
 document.getElementById('confirmationCancel').addEventListener('click', function() {
-    document.getElementById('paymentConfirmationModal').style.display = 'none';
+    const modal = document.getElementById('paymentConfirmationModal');
+    modal.classList.remove('show');
+    setTimeout(() => modal.style.display = 'none', 300);
+});
+
+document.getElementById('successModalClose').addEventListener('click', function() {
+    const modal = document.getElementById('paymentSuccessModal');
+    modal.classList.remove('show');
+    setTimeout(() => modal.style.display = 'none', 300);
 });
 
 document.getElementById('successModalOverlay').addEventListener('click', function() {
-    // No cerrar automáticamente el modal de éxito
+    // No cerrar automáticamente el modal de éxito con overlay
 });
 
 // Funciones adicionales para mejorar la UX

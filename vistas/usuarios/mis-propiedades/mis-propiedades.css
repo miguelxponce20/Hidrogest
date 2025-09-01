@@ -1,0 +1,1156 @@
+/* ============================================
+   MIS-PROPIEDADES.CSS - Estilos para Mis Propiedades
+   ============================================
+
+   Estilos específicos para la vista de gestión de propiedades
+   Completa los estilos globales con elementos únicos de propiedades
+*/
+
+/* Header de página */
+.page-header {
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--on-surface);
+  margin: 0 0 8px 0;
+}
+
+.page-header p {
+  font-size: 16px;
+  color: var(--on-surface-secondary);
+  margin: 0;
+}
+
+/* Estadísticas de propiedades */
+.properties-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--outline-light);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-icon {
+  font-size: 32px;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-number {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--on-surface);
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  display: block;
+  font-size: 14px;
+  color: var(--on-surface-secondary);
+  font-weight: 600;
+}
+
+/* Lista de propiedades */
+.properties-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.property-card {
+  background: var(--surface);
+  border: 1px solid var(--outline-light);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.property-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+  border-color: var(--primary);
+}
+
+.property-card.active {
+  border-color: var(--success);
+  background: rgba(16, 185, 129, 0.02);
+}
+
+.property-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.property-title h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--on-surface);
+  margin: 0 0 8px 0;
+}
+
+.property-type {
+  display: inline-block;
+  font-size: 12px;
+  color: var(--on-surface-secondary);
+  background: var(--surface-secondary);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.property-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--surface-secondary);
+  color: var(--on-surface-secondary);
+}
+
+.property-status.active {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+}
+
+/* Contenido de la propiedad */
+.property-content {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.property-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.info-item label {
+  font-size: 12px;
+  color: var(--on-surface-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-item span {
+  font-size: 14px;
+  color: var(--on-surface);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Métricas de la propiedad */
+.property-metrics {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.metric {
+  background: var(--surface-secondary);
+  border: 1px solid var(--outline-light);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.metric:hover {
+  background: var(--surface);
+  border-color: var(--primary);
+}
+
+.metric-label {
+  display: block;
+  font-size: 12px;
+  color: var(--on-surface-secondary);
+  margin-bottom: 6px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metric-value {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--on-surface);
+}
+
+.metric-value.service-good {
+  color: var(--success);
+}
+
+/* Acciones de la propiedad */
+.property-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-outline {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background: var(--surface-secondary);
+  color: var(--on-surface);
+  border: 1px solid var(--outline);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-tertiary);
+  border-color: var(--primary);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--on-surface);
+  border: 1px solid var(--outline);
+}
+
+.btn-outline:hover {
+  background: var(--surface-secondary);
+  border-color: var(--primary);
+}
+
+/* Iconos en botones */
+.btn-primary svg,
+.btn-secondary svg,
+.btn-outline svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Estados de carga */
+.btn-primary:disabled,
+.btn-secondary:disabled,
+.btn-outline:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Acciones generales de propiedades */
+.properties-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Modal centrado correctamente */
+.property-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.property-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.property-modal .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1999;
+}
+
+.property-modal .modal-content {
+  background: white;
+  border-radius: 12px;
+  max-width: 800px;
+  max-height: 90vh;
+  width: 90%;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 2001;
+}
+
+.modal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.modal .modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.modal .modal-close:hover {
+  background-color: #f3f4f6;
+}
+
+.modal .modal-body {
+  padding: 24px;
+}
+
+
+
+.property-modal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.property-modal .modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.property-modal .modal-close:hover {
+  background-color: #f3f4f6;
+}
+
+.property-modal .modal-body {
+  padding: 24px;
+}
+
+/* Responsive para el modal */
+@media (max-width: 768px) {
+  .property-modal .modal-content {
+    width: 95%;
+    max-width: none;
+    margin: 10px;
+    max-height: 95vh;
+  }
+
+  .property-modal .modal-header {
+    padding: 16px 20px;
+  }
+
+  .property-modal .modal-body {
+    padding: 20px;
+  }
+
+  .property-details-content {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .property-detail-actions {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  .btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+.property-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.property-details-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.property-details-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.property-details-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.property-consumption-chart {
+  background: var(--surface-secondary);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+  grid-column: 1 / -1;
+}
+
+.property-consumption-chart h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--on-surface);
+  margin: 0 0 16px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .properties-stats {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .properties-list {
+    gap: 12px;
+  }
+
+  .property-content {
+    grid-template-columns: 1.2fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header h1 {
+    font-size: 24px;
+  }
+
+  .properties-stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .stat-card {
+    padding: 16px;
+  }
+
+  .stat-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+  }
+
+  .stat-number {
+    font-size: 18px;
+  }
+
+  .properties-list {
+    gap: 12px;
+  }
+
+  .property-card {
+    padding: 20px;
+  }
+
+  .property-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .property-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .property-metrics {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .property-actions {
+    flex-direction: column;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-outline {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px; /* Evitar zoom en iOS */
+  }
+
+  .properties-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .property-details-content {
+    grid-template-columns: 1fr;
+  }
+
+  .property-details-metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header {
+    margin-bottom: 16px;
+  }
+
+  .page-header h1 {
+    font-size: 20px;
+  }
+
+  .properties-stats {
+    margin-bottom: 16px;
+  }
+
+  .stat-card {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .stat-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .stat-number {
+    font-size: 16px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+  }
+
+  .properties-list {
+    gap: 12px;
+  }
+
+  .property-card {
+    padding: 16px;
+  }
+
+  .property-title h3 {
+    font-size: 18px;
+  }
+
+  .property-content {
+    gap: 16px;
+  }
+
+  .property-info {
+    gap: 12px;
+  }
+
+  .info-item span {
+    font-size: 13px;
+  }
+
+  .metric {
+    padding: 12px;
+  }
+
+  .metric-value {
+    font-size: 16px;
+  }
+
+  .properties-actions {
+    margin-top: 20px;
+  }
+}
+
+/* Soporte para landscape en móviles */
+@media (max-width: 768px) and (orientation: landscape) {
+  .stat-card {
+    padding: 12px;
+  }
+
+  .property-card {
+    padding: 16px;
+  }
+
+  .property-content {
+    gap: 16px;
+  }
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .property-card,
+  .stat-card,
+  .btn-primary,
+  .btn-secondary,
+  .btn-outline,
+  .metric {
+    transition: none;
+  }
+
+  .property-card:hover,
+  .stat-card:hover,
+  .metric:hover {
+    transform: none;
+  }
+}
+
+/* Focus visible */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Touch targets para móviles */
+@media (hover: none) and (pointer: coarse) {
+  .property-card {
+    min-height: 44px;
+    padding: 24px;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-outline {
+    min-height: 44px;
+  }
+
+  .stat-card {
+    min-height: 44px;
+    padding: 20px;
+  }
+}
+
+/* Remover estilos duplicados del archivo original */
+.propiedades-header,
+.propiedades-stats,
+.stat-card,
+.stat-info,
+.stat-number,
+.stat-label,
+.propiedades-list,
+.propiedad-card,
+.propiedad-header,
+.propiedad-title,
+.propiedad-type,
+.propiedad-status,
+.propiedad-content,
+.propiedad-info,
+.propiedad-metrics,
+.metric,
+.metric-label,
+.metric-value,
+.propiedad-actions,
+.propiedad-btn,
+.propiedades-actions,
+.add-propiedad-btn,
+.propiedad-modal,
+.propiedad-detalle-header,
+.propiedad-detalle-content,
+.propiedad-detalle-info,
+.propiedad-detalle-metrics,
+.propiedad-consumo-chart {
+  /* Estos estilos están duplicados arriba con nombres corregidos */
+  display: none; /* Temporal para evitar conflictos */
+}
+
+.propiedades-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.propiedades-header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--on-surface);
+  margin: 0;
+}
+
+.propiedades-header p {
+  font-size: 14px;
+  color: var(--on-surface-secondary);
+  margin: 4px 0 0 0;
+}
+
+.propiedades-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--outline-light);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.stat-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 16px;
+}
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-number {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--on-surface);
+  margin-bottom: 2px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--on-surface-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.propiedades-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 16px;
+}
+
+.propiedad-card {
+  background: var(--surface);
+  border: 1px solid var(--outline-light);
+  border-radius: 16px;
+  padding: 20px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.propiedad-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+  border-color: var(--primary);
+}
+
+.propiedad-card.active {
+  border-color: var(--success);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(16, 185, 129, 0.02) 100%);
+}
+
+.propiedad-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.propiedad-title h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--on-surface);
+  margin: 0 0 4px 0;
+}
+
+.propiedad-type {
+  font-size: 12px;
+  color: var(--on-surface-secondary);
+  background: var(--surface-secondary);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.propiedad-status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  min-width: 80px;
+}
+
+.propiedad-status.active {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success);
+}
+
+.propiedad-status.inactive {
+  background: rgba(107, 114, 128, 0.1);
+  color: var(--on-surface-secondary);
+}
+
+.propiedad-content {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.propiedad-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-item label {
+  font-size: 12px;
+  color: var(--on-surface-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-item span {
+  font-size: 14px;
+  color: var(--on-surface);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.propiedad-metrics {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.metric {
+  background: var(--surface-secondary);
+  border: 1px solid var(--outline-light);
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+}
+
+.metric-label {
+  font-size: 12px;
+  color: var(--on-surface-secondary);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.metric-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--on-surface);
+}
+
+.propiedad-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.propiedad-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.propiedad-btn.primary {
+  background: var(--primary);
+  color: white;
+}
+
+.propiedad-btn.primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.propiedad-btn.secondary {
+  background: var(--surface-secondary);
+  color: var(--on-surface);
+  border: 1px solid var(--outline);
+}
+
+.propiedad-btn.secondary:hover {
+  background: var(--surface-tertiary);
+}
+
+.propiedad-btn.outline {
+  background: transparent;
+  color: var(--on-surface);
+  border: 1px solid var(--outline);
+}
+
+.propiedad-btn.outline:hover {
+  background: var(--surface-secondary);
+  border-color: var(--primary);
+}
+
+.propiedades-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  justify-content: center;
+}
+
+.add-propiedad-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.add-propiedad-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.add-propiedad-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Modal de detalles de propiedad */
+.propiedad-modal .modal-content {
+  max-width: 700px;
+}
+
+.propiedad-detalle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.propiedad-detalle-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.propiedad-detalle-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.propiedad-detalle-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.propiedad-consumo-chart {
+  background: var(--surface-secondary);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+  grid-column: 1 / -1;
+}
+
+.propiedad-consumo-chart h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--on-surface);
+  margin: 0 0 16px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .propiedades-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .propiedades-list {
+    grid-template-columns: 1fr;
+  }
+
+  .propiedades-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .propiedad-content {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .propiedad-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .propiedad-actions {
+    flex-direction: column;
+  }
+
+  .propiedad-btn {
+    width: 100%;
+  }
+
+  .propiedades-actions {
+    flex-direction: column;
+  }
+
+  .add-propiedad-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .propiedad-detalle-content {
+    grid-template-columns: 1fr;
+  }
+
+  .propiedad-detalle-metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .propiedades-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    padding: 12px;
+  }
+
+  .stat-number {
+    font-size: 16px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+  }
+
+  .propiedad-card {
+    padding: 16px;
+  }
+
+  .propiedad-title h3 {
+    font-size: 16px;
+  }
+
+  .metric {
+    padding: 10px;
+  }
+
+  .metric-value {
+    font-size: 14px;
+  }
+}
